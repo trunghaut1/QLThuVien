@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CTPhieuMuon">
           <Key>
             <PropertyRef Name="ID" />
@@ -129,7 +129,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CTPhieuMuon_PhieuMuon">
-          <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />
+          <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CTPhieuMuon" Type="Self.CTPhieuMuon" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuMuon">
@@ -153,7 +155,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CTPhieuTra_PhieuTra">
-          <End Role="PhieuTra" Type="Self.PhieuTra" Multiplicity="1" />
+          <End Role="PhieuTra" Type="Self.PhieuTra" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CTPhieuTra" Type="Self.CTPhieuTra" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhieuTra">
@@ -249,7 +253,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TacGia_Sach_DauSach">
-          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TacGia_Sach" Type="Self.TacGia_Sach" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DauSach">
@@ -339,8 +345,7 @@
             <End Role="TacGia_Sach" EntitySet="TacGia_Sach" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLThuVienModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
