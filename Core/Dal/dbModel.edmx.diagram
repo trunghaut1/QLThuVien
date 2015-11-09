@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1484264ecb9742c7b2034e4de00a7d87" Name="Diagram1">
+        <EntityTypeShape EntityType="QLThuVienModel.CTPhieuMuon" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.CTPhieuTra" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.CuonSach" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.DauSach" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.DocGia" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.LoaiSach" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.NXB" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.PhieuMuon" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.PhieuTra" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.TacGia" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.TacGia_Sach" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.TinhTrangCuonSach" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThuVienModel.TrangThaiDauSach" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="QLThuVienModel.FK_CTPhieuMuon_CuonSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_CTPhieuMuon_PhieuMuon" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_CTPhieuTra_CuonSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_CTPhieuTra_PhieuTra" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_CuonSach_DauSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_CuonSach_TinhTrangCuonSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_DauSach_LoaiSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_DauSach_MaNXB" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_DauSach_TrangThaiDauSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_TacGia_Sach_DauSach" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_PhieuMuon_DocGia" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_PhieuTra_PhieuMuon" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_TacGia_Sach_TacGia" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
