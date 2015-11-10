@@ -9,7 +9,6 @@ namespace Core.Biz
     {
         // Lấy chi tiết phiếu mượn theo mã phiếu mượn
         // >> Dùng hàm Search
-        //
         public List<CTPhieuMuon> Search(int? maphieumuon, int? macuonsach)
         {
             try
