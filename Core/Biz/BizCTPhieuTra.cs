@@ -9,6 +9,7 @@ namespace Core.Biz
     {
         // Lấy danh sách chi tiết phiếu trả theo mã phiếu trả
         // >> Dùng hàm Search
+        //
         public List<CTPhieuTra> Search(int? maphieutra, int? macuonsach)
         {
             try
