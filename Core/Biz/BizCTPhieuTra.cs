@@ -7,6 +7,7 @@ namespace Core.Biz
 {
     public class BizCTPhieuTra
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách chi tiết phiếu trả theo mã phiếu trả
         // >> Dùng hàm Search
         //
@@ -14,13 +15,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.CTPhieuTra select r;
-                    if (maphieutra != null) record = record.Where(r => r.MaPhieuTra == maphieutra);
-                    if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
-                    return record.ToList();
-                }
+                var record = from r in _db.CTPhieuTra select r;
+                if (maphieutra != null) record = record.Where(r => r.MaPhieuTra == maphieutra);
+                if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
+                return record.ToList();
             }
             catch (Exception e)
             {
@@ -33,12 +31,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.CTPhieuTra.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.CTPhieuTra.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -51,15 +46,12 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
+                foreach (var record in value)
                 {
-                    foreach (var record in value)
-                    {
-                        db.CTPhieuTra.Add(record);
-                    }
-                    db.SaveChanges();
-                    return true;
+                    _db.CTPhieuTra.Add(record);
                 }
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -72,13 +64,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    CTPhieuTra record = db.CTPhieuTra.SingleOrDefault(v => v.ID == value.ID);
-                    record.MaCuonSach = value.MaCuonSach;
-                    db.SaveChanges();
-                    return true;
-                }
+                CTPhieuTra record = _db.CTPhieuTra.SingleOrDefault(v => v.ID == value.ID);
+                record.MaCuonSach = value.MaCuonSach;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -91,13 +80,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    CTPhieuTra record = db.CTPhieuTra.SingleOrDefault(v => v.ID == id);
-                    db.CTPhieuTra.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                CTPhieuTra record = _db.CTPhieuTra.SingleOrDefault(v => v.ID == id);
+                _db.CTPhieuTra.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {

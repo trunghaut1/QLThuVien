@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizPhieuMuon
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách phiếu mượn
         public List<PhieuMuon> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.PhieuMuon.ToList();
-                }
+                return _db.PhieuMuon.ToList();
             }
             catch (Exception e)
             {
@@ -28,11 +26,8 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuMuon record = db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == id);
-                    return record;
-                }
+                PhieuMuon record = _db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == id);
+                return record;
             }
             catch (Exception e)
             {
@@ -45,12 +40,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.PhieuMuon.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.PhieuMuon.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -63,14 +55,11 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuMuon record = db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == value.MaPhieuMuon);
-                    record.MaDocGia = value.MaDocGia;
-                    record.NgayMuon = value.NgayMuon;
-                    db.SaveChanges();
-                    return true;
-                }
+                PhieuMuon record = _db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == value.MaPhieuMuon);
+                record.MaDocGia = value.MaDocGia;
+                record.NgayMuon = value.NgayMuon;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -83,13 +72,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuMuon record = db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == id);
-                    db.PhieuMuon.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                PhieuMuon record = _db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == id);
+                _db.PhieuMuon.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -102,14 +88,11 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.PhieuMuon select r;
-                    if (docgia != null) record = record.Where(r => r.MaDocGia == docgia);
-                    // Điều kiện ngày mượn >= ngaymuon
-                    if (ngaymuon != null) record = record.Where(r => r.NgayMuon >= ngaymuon);
-                    return record.ToList();
-                }
+                var record = from r in _db.PhieuMuon select r;
+                if (docgia != null) record = record.Where(r => r.MaDocGia == docgia);
+                // Điều kiện ngày mượn >= ngaymuon
+                if (ngaymuon != null) record = record.Where(r => r.NgayMuon >= ngaymuon);
+                return record.ToList();
             }
             catch (Exception e)
             {

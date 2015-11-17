@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizPhieuTra
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách phiếu trả
         public List<PhieuTra> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.PhieuTra.ToList();
-                }
+                return _db.PhieuTra.ToList();
             }
             catch (Exception e)
             {
@@ -28,11 +26,8 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuTra record = db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == id);
-                    return record;
-                }
+                PhieuTra record = _db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == id);
+                return record;
             }
             catch (Exception e)
             {
@@ -45,12 +40,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.PhieuTra.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.PhieuTra.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -63,14 +55,11 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuTra record = db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == value.MaPhieuTra);
-                    record.MaPhieuMuon = value.MaPhieuMuon;
-                    record.NgayTra = value.NgayTra;
-                    db.SaveChanges();
-                    return true;
-                }
+                PhieuTra record = _db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == value.MaPhieuTra);
+                record.MaPhieuMuon = value.MaPhieuMuon;
+                record.NgayTra = value.NgayTra;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -83,13 +72,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    PhieuTra record = db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == id);
-                    db.PhieuTra.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                PhieuTra record = _db.PhieuTra.SingleOrDefault(v => v.MaPhieuTra == id);
+                _db.PhieuTra.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -102,14 +88,11 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.PhieuTra select r;
-                    if (phieumuon != null) record = record.Where(r => r.MaPhieuMuon == phieumuon);
-                    // Điều kiện ngày mượn <= ngaymuon
-                    if (ngaytra != null) record = record.Where(r => r.NgayTra <= ngaytra);
-                    return record.ToList();
-                }
+                var record = from r in _db.PhieuTra select r;
+                if (phieumuon != null) record = record.Where(r => r.MaPhieuMuon == phieumuon);
+                // Điều kiện ngày mượn <= ngaymuon
+                if (ngaytra != null) record = record.Where(r => r.NgayTra <= ngaytra);
+                return record.ToList();
             }
             catch (Exception e)
             {

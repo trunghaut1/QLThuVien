@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizDauSach
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách đầu sách
         public List<DauSach> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.DauSach.ToList();
-                }
+                return _db.DauSach.ToList();
             }
             catch (Exception e)
             {
@@ -28,11 +26,8 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    DauSach record = db.DauSach.SingleOrDefault(v => v.MaDauSach == id);
-                    return record;
-                }
+                DauSach record = _db.DauSach.SingleOrDefault(v => v.MaDauSach == id);
+                return record;
             }
             catch (Exception e)
             {
@@ -45,12 +40,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.DauSach.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.DauSach.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -63,17 +55,14 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    DauSach record = db.DauSach.SingleOrDefault(v => v.MaDauSach == value.MaDauSach);
-                    record.TenDauSach = value.TenDauSach;
-                    record.MaLoai = value.MaLoai;
-                    record.MaNXB = value.MaNXB;
-                    record.MaTrangThai = value.MaTrangThai;
-                    record.TomTat = value.TomTat;
-                    db.SaveChanges();
-                    return true;
-                }
+                DauSach record = _db.DauSach.SingleOrDefault(v => v.MaDauSach == value.MaDauSach);
+                record.TenDauSach = value.TenDauSach;
+                record.MaLoai = value.MaLoai;
+                record.MaNXB = value.MaNXB;
+                record.MaTrangThai = value.MaTrangThai;
+                record.TomTat = value.TomTat;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -86,13 +75,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    DauSach record = db.DauSach.SingleOrDefault(v => v.MaDauSach == id);
-                    db.DauSach.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                DauSach record = _db.DauSach.SingleOrDefault(v => v.MaDauSach == id);
+                _db.DauSach.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -105,15 +91,12 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.DauSach select r;
-                    if (ten != null) record = record.Where(r => r.TenDauSach.Contains(ten));
-                    if (loai != null) record = record.Where(r => r.MaLoai == loai);
-                    if (nxb != null) record = record.Where(r => r.MaNXB == nxb);
-                    if (trangthai != null) record = record.Where(r => r.MaTrangThai == trangthai);
-                    return record.ToList();
-                }
+                var record = from r in _db.DauSach select r;
+                if (ten != null) record = record.Where(r => r.TenDauSach.Contains(ten));
+                if (loai != null) record = record.Where(r => r.MaLoai == loai);
+                if (nxb != null) record = record.Where(r => r.MaNXB == nxb);
+                if (trangthai != null) record = record.Where(r => r.MaTrangThai == trangthai);
+                return record.ToList();
             }
             catch (Exception e)
             {

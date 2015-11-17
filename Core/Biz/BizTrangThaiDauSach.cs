@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizTrangThaiDauSach
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách trạng thái đầu sách
         public List<TrangThaiDauSach> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.TrangThaiDauSach.ToList();
-                }
+                return _db.TrangThaiDauSach.ToList();
             }
             catch (Exception e)
             {
@@ -28,11 +26,8 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TrangThaiDauSach record = db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == id);
-                    return record;
-                }
+                TrangThaiDauSach record = _db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == id);
+                return record;
             }
             catch (Exception e)
             {
@@ -45,12 +40,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.TrangThaiDauSach.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.TrangThaiDauSach.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -63,13 +55,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TrangThaiDauSach record = db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == value.MaTrangThai);
-                    record.TenTrangThai = value.TenTrangThai;
-                    db.SaveChanges();
-                    return true;
-                }
+                TrangThaiDauSach record = _db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == value.MaTrangThai);
+                record.TenTrangThai = value.TenTrangThai;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -82,13 +71,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TrangThaiDauSach record = db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == id);
-                    db.TrangThaiDauSach.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                TrangThaiDauSach record = _db.TrangThaiDauSach.SingleOrDefault(v => v.MaTrangThai == id);
+                _db.TrangThaiDauSach.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -101,12 +87,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.TrangThaiDauSach select r;
-                    if (ten != null) record = record.Where(r => r.TenTrangThai.Contains(ten));
-                    return record.ToList();
-                }
+                var record = from r in _db.TrangThaiDauSach select r;
+                if (ten != null) record = record.Where(r => r.TenTrangThai.Contains(ten));
+                return record.ToList();
             }
             catch (Exception e)
             {

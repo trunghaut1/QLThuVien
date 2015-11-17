@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizTacGia_Sach
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách tacgia_sach
         public List<TacGia_Sach> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.TacGia_Sach.ToList();
-                }
+                return _db.TacGia_Sach.ToList();
             }
             catch (Exception e)
             {
@@ -28,12 +26,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.TacGia_Sach.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.TacGia_Sach.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -46,14 +41,11 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TacGia_Sach record = db.TacGia_Sach.SingleOrDefault(v => v.ID == value.ID);
-                    record.MaDauSach = value.MaDauSach;
-                    record.MaTacGia = value.MaTacGia;
-                    db.SaveChanges();
-                    return true;
-                }
+                TacGia_Sach record = _db.TacGia_Sach.SingleOrDefault(v => v.ID == value.ID);
+                record.MaDauSach = value.MaDauSach;
+                record.MaTacGia = value.MaTacGia;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -66,13 +58,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TacGia_Sach record = db.TacGia_Sach.SingleOrDefault(v => v.ID == id);
-                    db.TacGia_Sach.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                TacGia_Sach record = _db.TacGia_Sach.SingleOrDefault(v => v.ID == id);
+                _db.TacGia_Sach.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -85,13 +74,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.TacGia_Sach select r;
-                    if (dausach != null) record = record.Where(r => r.MaDauSach == dausach);
-                    if (tacgia != null) record = record.Where(r => r.MaTacGia == tacgia);
-                    return record.ToList();
-                }
+                var record = from r in _db.TacGia_Sach select r;
+                if (dausach != null) record = record.Where(r => r.MaDauSach == dausach);
+                if (tacgia != null) record = record.Where(r => r.MaTacGia == tacgia);
+                return record.ToList();
             }
             catch (Exception e)
             {

@@ -7,19 +7,17 @@ namespace Core.Biz
 {
     public class BizCTPhieuMuon
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy chi tiết phiếu mượn theo mã phiếu mượn
         // >> Dùng hàm Search
         public List<CTPhieuMuon> Search(int? maphieumuon, int? macuonsach)
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.CTPhieuMuon select r;
-                    if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);
-                    if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
-                    return record.ToList();
-                }
+                var record = from r in _db.CTPhieuMuon select r;
+                if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);
+                if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
+                return record.ToList();
             }
             catch (Exception e)
             {
@@ -32,12 +30,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.CTPhieuMuon.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.CTPhieuMuon.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -50,15 +45,12 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
+                foreach (var record in value)
                 {
-                    foreach(var record in value)
-                    {
-                        db.CTPhieuMuon.Add(record);
-                    }
-                    db.SaveChanges();
-                    return true;
+                    _db.CTPhieuMuon.Add(record);
                 }
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -71,13 +63,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    CTPhieuMuon record = db.CTPhieuMuon.SingleOrDefault(v => v.ID == value.ID);
-                    record.MaCuonSach = value.MaCuonSach;
-                    db.SaveChanges();
-                    return true;
-                }
+                CTPhieuMuon record = _db.CTPhieuMuon.SingleOrDefault(v => v.ID == value.ID);
+                record.MaCuonSach = value.MaCuonSach;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -90,13 +79,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    CTPhieuMuon record = db.CTPhieuMuon.SingleOrDefault(v => v.ID == id);
-                    db.CTPhieuMuon.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                CTPhieuMuon record = _db.CTPhieuMuon.SingleOrDefault(v => v.ID == id);
+                _db.CTPhieuMuon.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {

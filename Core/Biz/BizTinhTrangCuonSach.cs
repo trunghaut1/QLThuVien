@@ -7,15 +7,13 @@ namespace Core.Biz
 {
     public class BizTinhTrangCuonSach
     {
+        QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy danh sách tình trạng cuốn sách
         public List<TinhTrangCuonSach> GetAll()
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    return db.TinhTrangCuonSach.ToList();
-                }
+                return _db.TinhTrangCuonSach.ToList();
             }
             catch (Exception e)
             {
@@ -28,11 +26,8 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TinhTrangCuonSach record = db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == id);
-                    return record;
-                }
+                TinhTrangCuonSach record = _db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == id);
+                return record;
             }
             catch (Exception e)
             {
@@ -45,12 +40,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    db.TinhTrangCuonSach.Add(value);
-                    db.SaveChanges();
-                    return true;
-                }
+                _db.TinhTrangCuonSach.Add(value);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -63,13 +55,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TinhTrangCuonSach record = db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == value.MaTinhTrang);
-                    record.TenTinhTrang = value.TenTinhTrang;
-                    db.SaveChanges();
-                    return true;
-                }
+                TinhTrangCuonSach record = _db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == value.MaTinhTrang);
+                record.TenTinhTrang = value.TenTinhTrang;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -82,13 +71,10 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    TinhTrangCuonSach record = db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == id);
-                    db.TinhTrangCuonSach.Remove(record);
-                    db.SaveChanges();
-                    return true;
-                }
+                TinhTrangCuonSach record = _db.TinhTrangCuonSach.SingleOrDefault(v => v.MaTinhTrang == id);
+                _db.TinhTrangCuonSach.Remove(record);
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
@@ -101,12 +87,9 @@ namespace Core.Biz
         {
             try
             {
-                using (var db = new QLThuVienEntities())
-                {
-                    var record = from r in db.TinhTrangCuonSach select r;
-                    if (ten != null) record = record.Where(r => r.TenTinhTrang.Contains(ten));
-                    return record.ToList();
-                }
+                var record = from r in _db.TinhTrangCuonSach select r;
+                if (ten != null) record = record.Where(r => r.TenTinhTrang.Contains(ten));
+                return record.ToList();
             }
             catch (Exception e)
             {
