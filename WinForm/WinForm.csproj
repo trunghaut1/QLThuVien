@@ -111,6 +111,10 @@
       <Project>{a02b4ead-be08-452d-bb47-05d18f2d782b}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlatTheme\FlatTheme.csproj">
+      <Project>{dd9b70ef-db16-449b-91fb-6abb7b0f08dd}</Project>
+      <Name>FlatTheme</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
