@@ -17,7 +17,6 @@ namespace Core.Dal
         public DauSach()
         {
             this.CuonSach = new HashSet<CuonSach>();
-            this.TacGia_Sach = new HashSet<TacGia_Sach>();
         }
     
         public int MaDauSach { get; set; }
@@ -26,11 +25,12 @@ namespace Core.Dal
         public Nullable<int> MaNXB { get; set; }
         public Nullable<int> MaTrangThai { get; set; }
         public string TomTat { get; set; }
+        public Nullable<int> MaTacGia { get; set; }
     
         public virtual ICollection<CuonSach> CuonSach { get; set; }
         public virtual LoaiSach LoaiSach { get; set; }
         public virtual NXB NXB { get; set; }
         public virtual TrangThaiDauSach TrangThaiDauSach { get; set; }
-        public virtual ICollection<TacGia_Sach> TacGia_Sach { get; set; }
+        public virtual TacGia TacGia { get; set; }
     }
 }

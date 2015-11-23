@@ -6,8 +6,83 @@
         xmlns:local="clr-namespace:WinForm"
         xmlns:flat="clr-namespace:FlatTheme.ControlStyle;assembly=FlatTheme"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Style="{DynamicResource FlatWindow}">
+        Title="QUẢN LÝ THƯ VIỆN" Height="670" Width="1180" MinHeight="600" MinWidth="1000" Style="{DynamicResource FlatWindow}" WindowStartupLocation="CenterScreen" FontSize="16">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="42"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Viewbox  Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0">
+                    <Path x:Name="iHome" Style="{DynamicResource DauSachIcon}"/>
+                </Viewbox>
+                <Border HorizontalAlignment="Right" BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0,0,1,0" Margin="0,0,5,5"/>
+            </Grid>
+            <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1">
+                <MenuItem Header="Quản lý sách">
+                    <MenuItem.Icon>
+                        <Viewbox>
+                            <Path Style="{DynamicResource DauSachIcon}"/>
+                        </Viewbox>
+                    </MenuItem.Icon>
+                    <MenuItem x:Name="mnLoaiSach" Header="Loại sách" Click="mnLoaiSach_Click">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource LoaiSachIcon}" />
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="mnTacGia" Header="Tác giả" Click="mnTacGia_Click">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource TacGiaIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Nhà xuất bản">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource NXBIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Đầu sách">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource DauSachIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Cuốn sách">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource CuonSachIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Thống kê - Báo cáo">
+                    <MenuItem.Icon>
+                        <Viewbox>
+                            <Path Style="{DynamicResource ThongKeIcon}"/>
+                        </Viewbox>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <ToggleButton x:Name="btnChangeTheme" Margin="5 0" Checked="btnChangeTheme_Checked" Unchecked="btnChangeTheme_Unchecked"/>
+                <Label Content="Nền tối"/>
+                <Button x:Name="btnClose" Content="Thoát" Height="30" Width="80" Margin="10 0" Click="btnClose_Click"/>
+                
+            </StackPanel>
+            <Border VerticalAlignment="Bottom" BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0,0,0,1" Grid.ColumnSpan="3"/>
+        </Grid>
+        <Grid x:Name="MainGrid" Grid.Row="1" Margin="0,5,0,0"/>
     </Grid>
 </flat:FlatWindow>

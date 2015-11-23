@@ -61,7 +61,6 @@
     <Compile Include="Biz\BizPhieuMuon.cs" />
     <Compile Include="Biz\BizPhieuTra.cs" />
     <Compile Include="Biz\BizTacGia.cs" />
-    <Compile Include="Biz\BizTacGia_Sach.cs" />
     <Compile Include="Biz\BizTinhTrangCuonSach.cs" />
     <Compile Include="Biz\BizTrangThaiDauSach.cs" />
     <Compile Include="Biz\BizDauSach.cs" />
@@ -108,9 +107,6 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dal\TacGia.cs">
-      <DependentUpon>dbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Dal\TacGia_Sach.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dal\TinhTrangCuonSach.cs">

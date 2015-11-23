@@ -37,6 +37,7 @@
           <Property Name="MaLoai" Type="int" />
           <Property Name="TenDauSach" Type="nvarchar" MaxLength="256" />
           <Property Name="MaNXB" Type="int" />
+          <Property Name="MaTacGia" Type="int" />
           <Property Name="MaTrangThai" Type="int" />
           <Property Name="TomTat" Type="nvarchar" MaxLength="3000" />
         </EntityType>
@@ -93,14 +94,6 @@
           <Property Name="MaTacGia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenTacGia" Type="nvarchar" MaxLength="256" />
           <Property Name="NoiCongTac" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="TacGia_Sach">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaDauSach" Type="int" Nullable="false" />
-          <Property Name="MaTacGia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TinhTrangCuonSach">
           <Key>
@@ -216,6 +209,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DauSach_TacGia">
+          <End Role="TacGia" Type="Self.TacGia" Multiplicity="0..1" />
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="MaTacGia" />
+            </Principal>
+            <Dependent Role="DauSach">
+              <PropertyRef Name="MaTacGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DauSach_TrangThaiDauSach">
           <End Role="TrangThaiDauSach" Type="Self.TrangThaiDauSach" Multiplicity="0..1" />
           <End Role="DauSach" Type="Self.DauSach" Multiplicity="*" />
@@ -252,32 +257,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TacGia_Sach_DauSach">
-          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="TacGia_Sach" Type="Self.TacGia_Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DauSach">
-              <PropertyRef Name="MaDauSach" />
-            </Principal>
-            <Dependent Role="TacGia_Sach">
-              <PropertyRef Name="MaDauSach" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TacGia_Sach_TacGia">
-          <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
-          <End Role="TacGia_Sach" Type="Self.TacGia_Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TacGia">
-              <PropertyRef Name="MaTacGia" />
-            </Principal>
-            <Dependent Role="TacGia_Sach">
-              <PropertyRef Name="MaTacGia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QLThuVienModelStoreContainer">
           <EntitySet Name="CTPhieuMuon" EntityType="Self.CTPhieuMuon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CTPhieuTra" EntityType="Self.CTPhieuTra" Schema="dbo" store:Type="Tables" />
@@ -289,7 +268,6 @@
           <EntitySet Name="PhieuMuon" EntityType="Self.PhieuMuon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhieuTra" EntityType="Self.PhieuTra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TacGia_Sach" EntityType="Self.TacGia_Sach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TinhTrangCuonSach" EntityType="Self.TinhTrangCuonSach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrangThaiDauSach" EntityType="Self.TrangThaiDauSach" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CTPhieuMuon_CuonSach" Association="Self.FK_CTPhieuMuon_CuonSach">
@@ -324,6 +302,10 @@
             <End Role="NXB" EntitySet="NXB" />
             <End Role="DauSach" EntitySet="DauSach" />
           </AssociationSet>
+          <AssociationSet Name="FK_DauSach_TacGia" Association="Self.FK_DauSach_TacGia">
+            <End Role="TacGia" EntitySet="TacGia" />
+            <End Role="DauSach" EntitySet="DauSach" />
+          </AssociationSet>
           <AssociationSet Name="FK_DauSach_TrangThaiDauSach" Association="Self.FK_DauSach_TrangThaiDauSach">
             <End Role="TrangThaiDauSach" EntitySet="TrangThaiDauSach" />
             <End Role="DauSach" EntitySet="DauSach" />
@@ -335,14 +317,6 @@
           <AssociationSet Name="FK_PhieuTra_PhieuMuon" Association="Self.FK_PhieuTra_PhieuMuon">
             <End Role="PhieuMuon" EntitySet="PhieuMuon" />
             <End Role="PhieuTra" EntitySet="PhieuTra" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TacGia_Sach_DauSach" Association="Self.FK_TacGia_Sach_DauSach">
-            <End Role="DauSach" EntitySet="DauSach" />
-            <End Role="TacGia_Sach" EntitySet="TacGia_Sach" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TacGia_Sach_TacGia" Association="Self.FK_TacGia_Sach_TacGia">
-            <End Role="TacGia" EntitySet="TacGia" />
-            <End Role="TacGia_Sach" EntitySet="TacGia_Sach" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -395,7 +369,8 @@
           <NavigationProperty Name="LoaiSach" Relationship="Self.FK_DauSach_LoaiSach" FromRole="DauSach" ToRole="LoaiSach" />
           <NavigationProperty Name="NXB" Relationship="Self.FK_DauSach_MaNXB" FromRole="DauSach" ToRole="NXB" />
           <NavigationProperty Name="TrangThaiDauSach" Relationship="Self.FK_DauSach_TrangThaiDauSach" FromRole="DauSach" ToRole="TrangThaiDauSach" />
-          <NavigationProperty Name="TacGia_Sach" Relationship="Self.FK_TacGia_Sach_DauSach" FromRole="DauSach" ToRole="TacGia_Sach" />
+          <Property Name="MaTacGia" Type="Int32" />
+          <NavigationProperty Name="TacGia" Relationship="QLThuVienModel.FK_DauSach_TacGia" FromRole="DauSach" ToRole="TacGia" />
         </EntityType>
         <EntityType Name="DocGia">
           <Key>
@@ -458,17 +433,7 @@
           <Property Name="MaTacGia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenTacGia" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="NoiCongTac" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TacGia_Sach" Relationship="Self.FK_TacGia_Sach_TacGia" FromRole="TacGia" ToRole="TacGia_Sach" />
-        </EntityType>
-        <EntityType Name="TacGia_Sach">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaDauSach" Type="Int32" Nullable="false" />
-          <Property Name="MaTacGia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DauSach" Relationship="Self.FK_TacGia_Sach_DauSach" FromRole="TacGia_Sach" ToRole="DauSach" />
-          <NavigationProperty Name="TacGia" Relationship="Self.FK_TacGia_Sach_TacGia" FromRole="TacGia_Sach" ToRole="TacGia" />
+          <NavigationProperty Name="DauSach" Relationship="QLThuVienModel.FK_DauSach_TacGia" FromRole="TacGia" ToRole="DauSach" />
         </EntityType>
         <EntityType Name="TinhTrangCuonSach">
           <Key>
@@ -594,18 +559,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TacGia_Sach_DauSach">
-          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
-          <End Role="TacGia_Sach" Type="Self.TacGia_Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DauSach">
-              <PropertyRef Name="MaDauSach" />
-            </Principal>
-            <Dependent Role="TacGia_Sach">
-              <PropertyRef Name="MaDauSach" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PhieuMuon_DocGia">
           <End Role="DocGia" Type="Self.DocGia" Multiplicity="0..1" />
           <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="*" />
@@ -630,18 +583,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TacGia_Sach_TacGia">
-          <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
-          <End Role="TacGia_Sach" Type="Self.TacGia_Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TacGia">
-              <PropertyRef Name="MaTacGia" />
-            </Principal>
-            <Dependent Role="TacGia_Sach">
-              <PropertyRef Name="MaTacGia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QLThuVienEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CTPhieuMuon" EntityType="Self.CTPhieuMuon" />
           <EntitySet Name="CTPhieuTra" EntityType="Self.CTPhieuTra" />
@@ -653,7 +594,6 @@
           <EntitySet Name="PhieuMuon" EntityType="Self.PhieuMuon" />
           <EntitySet Name="PhieuTra" EntityType="Self.PhieuTra" />
           <EntitySet Name="TacGia" EntityType="Self.TacGia" />
-          <EntitySet Name="TacGia_Sach" EntityType="Self.TacGia_Sach" />
           <EntitySet Name="TinhTrangCuonSach" EntityType="Self.TinhTrangCuonSach" />
           <EntitySet Name="TrangThaiDauSach" EntityType="Self.TrangThaiDauSach" />
           <AssociationSet Name="FK_CTPhieuMuon_CuonSach" Association="Self.FK_CTPhieuMuon_CuonSach">
@@ -692,10 +632,6 @@
             <End Role="TrangThaiDauSach" EntitySet="TrangThaiDauSach" />
             <End Role="DauSach" EntitySet="DauSach" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacGia_Sach_DauSach" Association="Self.FK_TacGia_Sach_DauSach">
-            <End Role="DauSach" EntitySet="DauSach" />
-            <End Role="TacGia_Sach" EntitySet="TacGia_Sach" />
-          </AssociationSet>
           <AssociationSet Name="FK_PhieuMuon_DocGia" Association="Self.FK_PhieuMuon_DocGia">
             <End Role="DocGia" EntitySet="DocGia" />
             <End Role="PhieuMuon" EntitySet="PhieuMuon" />
@@ -704,11 +640,23 @@
             <End Role="PhieuMuon" EntitySet="PhieuMuon" />
             <End Role="PhieuTra" EntitySet="PhieuTra" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacGia_Sach_TacGia" Association="Self.FK_TacGia_Sach_TacGia">
+          <AssociationSet Name="FK_DauSach_TacGia" Association="QLThuVienModel.FK_DauSach_TacGia">
             <End Role="TacGia" EntitySet="TacGia" />
-            <End Role="TacGia_Sach" EntitySet="TacGia_Sach" />
+            <End Role="DauSach" EntitySet="DauSach" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_DauSach_TacGia">
+          <End Type="QLThuVienModel.TacGia" Role="TacGia" Multiplicity="0..1" />
+          <End Type="QLThuVienModel.DauSach" Role="DauSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacGia">
+              <PropertyRef Name="MaTacGia" />
+            </Principal>
+            <Dependent Role="DauSach">
+              <PropertyRef Name="MaTacGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -745,6 +693,7 @@
           <EntitySetMapping Name="DauSach">
             <EntityTypeMapping TypeName="QLThuVienModel.DauSach">
               <MappingFragment StoreEntitySet="DauSach">
+                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
                 <ScalarProperty Name="MaDauSach" ColumnName="MaDauSach" />
                 <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
                 <ScalarProperty Name="TenDauSach" ColumnName="TenDauSach" />
@@ -811,15 +760,6 @@
                 <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
                 <ScalarProperty Name="TenTacGia" ColumnName="TenTacGia" />
                 <ScalarProperty Name="NoiCongTac" ColumnName="NoiCongTac" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TacGia_Sach">
-            <EntityTypeMapping TypeName="QLThuVienModel.TacGia_Sach">
-              <MappingFragment StoreEntitySet="TacGia_Sach">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="MaDauSach" ColumnName="MaDauSach" />
-                <ScalarProperty Name="MaTacGia" ColumnName="MaTacGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

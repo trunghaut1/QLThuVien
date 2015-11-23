@@ -16,13 +16,13 @@ namespace Core.Dal
     {
         public TacGia()
         {
-            this.TacGia_Sach = new HashSet<TacGia_Sach>();
+            this.DauSach = new HashSet<DauSach>();
         }
     
         public int MaTacGia { get; set; }
         public string TenTacGia { get; set; }
         public string NoiCongTac { get; set; }
     
-        public virtual ICollection<TacGia_Sach> TacGia_Sach { get; set; }
+        public virtual ICollection<DauSach> DauSach { get; set; }
     }
 }

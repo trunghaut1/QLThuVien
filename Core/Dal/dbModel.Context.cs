@@ -35,7 +35,6 @@ namespace Core.Dal
         public DbSet<PhieuMuon> PhieuMuon { get; set; }
         public DbSet<PhieuTra> PhieuTra { get; set; }
         public DbSet<TacGia> TacGia { get; set; }
-        public DbSet<TacGia_Sach> TacGia_Sach { get; set; }
         public DbSet<TinhTrangCuonSach> TinhTrangCuonSach { get; set; }
         public DbSet<TrangThaiDauSach> TrangThaiDauSach { get; set; }
     }

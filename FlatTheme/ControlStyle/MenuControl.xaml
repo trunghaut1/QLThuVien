@@ -186,13 +186,13 @@
                         <Trigger Property="Role" Value="TopLevelHeader">
                             <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
                             <Setter Property="Padding" Value="16 0"/>
-                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="Height" Value="36"/>
                             <Setter TargetName="templateRoot" Property="CornerRadius" Value="2"/>
                             <Setter TargetName="BackgroundRoot" Property="CornerRadius" Value="2"/>
                         </Trigger>
                         <Trigger Property="Role" Value="TopLevelItem">
                             <Setter Property="Padding" Value="16 0"/>
-                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="Height" Value="36"/>
                             <Setter TargetName="templateRoot" Property="CornerRadius" Value="2"/>
                             <Setter TargetName="BackgroundRoot" Property="CornerRadius" Value="2"/>
                         </Trigger>

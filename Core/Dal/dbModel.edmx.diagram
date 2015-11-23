@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="QLThuVienModel.PhieuMuon" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLThuVienModel.PhieuTra" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QLThuVienModel.TacGia" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThuVienModel.TacGia_Sach" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QLThuVienModel.TinhTrangCuonSach" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QLThuVienModel.TrangThaiDauSach" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="QLThuVienModel.FK_CTPhieuMuon_CuonSach" ManuallyRouted="false" />
@@ -27,10 +26,9 @@
         <AssociationConnector Association="QLThuVienModel.FK_DauSach_LoaiSach" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_DauSach_MaNXB" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_DauSach_TrangThaiDauSach" ManuallyRouted="false" />
-        <AssociationConnector Association="QLThuVienModel.FK_TacGia_Sach_DauSach" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_PhieuMuon_DocGia" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_PhieuTra_PhieuMuon" ManuallyRouted="false" />
-        <AssociationConnector Association="QLThuVienModel.FK_TacGia_Sach_TacGia" ManuallyRouted="false" />
+        <AssociationConnector Association="QLThuVienModel.FK_DauSach_TacGia" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
