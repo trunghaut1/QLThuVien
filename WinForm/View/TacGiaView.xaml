@@ -26,15 +26,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Mã loại:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtMaLoai" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10 0 200 0" IsReadOnly="True"/>
-                <Label Content="Tên loại:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtTenLoai" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="10 0 200 0"/>
+                <Label Content="Mã tác giả:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtMaTacGia" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10,0,200,0" IsReadOnly="True"/>
+                <Label Content="Tên tác giả:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtTenTacGia" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10 0 200 0"/>
+                <Label Content="Nơi công tác:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtNoiCongTac" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Margin="10 0 200 0"/>
             </Grid>
             <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
         </Grid>

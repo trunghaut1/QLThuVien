@@ -104,7 +104,7 @@ namespace Core.Biz
         {
             try
             {
-                int record = (from r in _db.TacGia_Sach where r.MaTacGia == id select r).Count();
+                int record = (from r in _db.DauSach where r.MaTacGia == id select r).Count();
                 if (record > 0) return false;
                 return true;
             }
