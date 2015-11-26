@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Core.Biz;
+using Core.Dal;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WinForm.View
 {
@@ -20,9 +14,128 @@ namespace WinForm.View
     /// </summary>
     public partial class TacGiaView : UserControl
     {
+        BizTacGia db = new BizTacGia();
         public TacGiaView()
         {
             InitializeComponent();
+            LoadList(null);
+        }
+
+        private void LoadList(List<TacGia> value)
+        {
+            CollectionViewSource myCollectionViewSource = (CollectionViewSource)this.Resources["tacGiaViewSource"];
+            myCollectionViewSource.Source = value ?? db.GetAll();
+        }
+
+        private void tacGiaDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var record = (TacGia)tacGiaDataGrid.SelectedItem;
+            if (record != null)
+            {
+                txtMaTacGia.Text = record.MaTacGia.ToString();
+                txtTenTacGia.Text = record.TenTacGia;
+                txtNoiCongTac.Text = record.NoiCongTac;
+            }
+        }
+        private bool CheckNull()
+        {
+            if (String.IsNullOrEmpty(txtTenTacGia.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên tác giả");
+                return false;
+            }
+            return true;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckNull()) return;
+            var record = new TacGia()
+            {
+                TenTacGia = txtTenTacGia.Text,
+                NoiCongTac = txtNoiCongTac.Text
+            };
+            if (db.Add(record))
+            {
+                MessageBox.Show("Thêm thành công");
+                LoadList(null);
+                tacGiaDataGrid.SelectedIndex = tacGiaDataGrid.Items.Count - 1;
+                tacGiaDataGrid.ScrollIntoView(record);
+            }
+            else MessageBox.Show("Thêm thất bại");
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var record = (TacGia)tacGiaDataGrid.SelectedItem;
+            if (record != null)
+            {
+                if (!CheckNull()) return;
+                int index = tacGiaDataGrid.SelectedIndex;
+                record.TenTacGia = txtTenTacGia.Text;
+                record.NoiCongTac = txtNoiCongTac.Text;
+                if (db.Update(record))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    LoadList(null);
+                    tacGiaDataGrid.SelectedIndex = index;
+                    tacGiaDataGrid.ScrollIntoView(record);
+                }
+                else MessageBox.Show("Cập nhật thất bại");
+            }
+            else MessageBox.Show("Vui lòng chọn tác giả");
+        }
+        private void ResetAll()
+        {
+            txtMaTacGia.Text = null;
+            txtTenTacGia.Text = null;
+            txtNoiCongTac.Text = null;
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+            var record = (TacGia)tacGiaDataGrid.SelectedItem;
+            if (record != null)
+            {
+                MessageBoxResult comf = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận", MessageBoxButton.YesNo);
+                if (!db.CheckFK(record.MaTacGia)) MessageBox.Show("Tồn tại đầu sách mang tác giả này, không thể xóa");
+                else
+                {
+                    if (db.Delete(record.MaTacGia))
+                    {
+                        MessageBox.Show("Xóa thành công");
+                        LoadList(null);
+                        ResetAll();
+                    }
+                    else MessageBox.Show("Xóa thất bại");
+                }
+            }
+            else MessageBox.Show("Vui lòng chọn tác giả");
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            txtNoiCongTac.Text = null;
+            txtTenTacGia.Text = null;
+        }
+        private void Search()
+        {
+            List<TacGia> record = db.Search(txtTenTacGiaS.Text, txtNoiCongTacS.Text);
+            LoadList(record);
+        }
+
+        private void Search_KeyUp(object sender, KeyEventArgs e)
+        {
+            Search();
+        }
+
+        private void btnResetS_Click(object sender, RoutedEventArgs e)
+        {
+            txtNoiCongTacS.Text = null;
+            txtTenTacGiaS.Text = null;
+            LoadList(null);
+            tacGiaDataGrid.SelectedIndex = -1;
+            ResetAll();
         }
     }
 }

@@ -26,6 +26,11 @@
                 <Button x:Name="btnDel" Content="Xóa" Width="120" Height="40" Margin="0 5" Click="btnDel_Click"/>
                 <Button x:Name="btnReset" Content="Làm mới" Width="120" Height="40" Margin="0 5" Click="btnReset_Click"/>
             </StackPanel>
+            <Button x:Name="btnClose2" Grid.Column="1" HorizontalAlignment="Right" Width="30" Height="30" Style="{DynamicResource CircleButton}" Margin="10 0" ToolTip="Thoát" Click="btnClose2_Click" Visibility="Hidden">
+                <Viewbox Width="15" Height="15">
+                    <Path Style="{DynamicResource CloseIcon}"/>
+                </Viewbox>
+            </Button>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -43,7 +48,7 @@
             <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="1" DataContext="{StaticResource loaiSachViewSource}">
-            <DataGrid x:Name="loaiSachDataGrid" Margin="0 10 0 0" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="loaiSachDataGrid_SelectionChanged">
+            <DataGrid x:Name="loaiSachDataGrid" Margin="0 5 0 0" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="loaiSachDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maLoaiColumn" Width="100" Header="Mã loại" Binding="{Binding MaLoai}"/>
                     <DataGridTextColumn x:Name="tenLoaiColumn" Width="300" Header="Tên loại" Binding="{Binding TenLoai}"/>

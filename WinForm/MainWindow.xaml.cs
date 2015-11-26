@@ -46,5 +46,21 @@ namespace WinForm
             iHome.SetResourceReference(StyleProperty, "TacGiaIcon");
             this.Title = "TÁC GIẢ" + _title;
         }
+
+        private void mnNXB_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new NXBView());
+            iHome.SetResourceReference(StyleProperty, "NXBIcon");
+            this.Title = "NHÀ XUẤT BẢN" + _title;
+        }
+
+        private void mnDauSach_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new DauSachView());
+            iHome.SetResourceReference(StyleProperty, "DauSachIcon");
+            this.Title = "ĐẦU SÁCH" + _title;
+        }
     }
 }
