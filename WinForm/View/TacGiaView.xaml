@@ -26,6 +26,11 @@
                 <Button x:Name="btnDel" Content="Xóa" Width="120" Height="40" Margin="0 5" Click="btnDel_Click"/>
                 <Button x:Name="btnReset" Content="Làm mới" Width="120" Height="40" Margin="0 5" Click="btnReset_Click"/>
             </StackPanel>
+            <Button x:Name="btnClose2" Grid.Column="1" HorizontalAlignment="Right" Width="30" Height="30" Style="{DynamicResource CircleButton}" Margin="10 0" ToolTip="Thoát" Click="btnClose2_Click" Visibility="Hidden">
+                <Viewbox Width="15" Height="15">
+                    <Path Style="{DynamicResource CloseIcon}"/>
+                </Viewbox>
+            </Button>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

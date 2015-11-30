@@ -20,6 +20,12 @@ namespace WinForm.View
             InitializeComponent();
             LoadList(null);
         }
+        public TacGiaView(bool child)
+        {
+            InitializeComponent();
+            LoadList(null);
+            if (child) btnClose2.Visibility = Visibility.Visible;
+        }
 
         private void LoadList(List<TacGia> value)
         {
@@ -136,6 +142,12 @@ namespace WinForm.View
             LoadList(null);
             tacGiaDataGrid.SelectedIndex = -1;
             ResetAll();
+        }
+
+        private void btnClose2_Click(object sender, RoutedEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            parent.Close();
         }
     }
 }

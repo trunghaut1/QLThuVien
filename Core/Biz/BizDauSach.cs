@@ -87,7 +87,7 @@ namespace Core.Biz
             }
         }
         // Tìm đầu sách
-        public List<DauSach> Search(string ten, int? loai, int? nxb, int? trangthai)
+        public List<DauSach> Search(string ten, int? loai, int? nxb, int? tacgia, int? trangthai)
         {
             try
             {
@@ -95,6 +95,7 @@ namespace Core.Biz
                 if (ten != null) record = record.Where(r => r.TenDauSach.Contains(ten));
                 if (loai != null) record = record.Where(r => r.MaLoai == loai);
                 if (nxb != null) record = record.Where(r => r.MaNXB == nxb);
+                if (tacgia != null) record = record.Where(r => r.MaTacGia == tacgia);
                 if (trangthai != null) record = record.Where(r => r.MaTrangThai == trangthai);
                 return record.ToList();
             }

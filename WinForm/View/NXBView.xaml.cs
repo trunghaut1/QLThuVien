@@ -29,6 +29,12 @@ namespace WinForm.View
             InitializeComponent();
             LoadList(null);
         }
+        public NXBView(bool child)
+        {
+            InitializeComponent();
+            LoadList(null);
+            if(child) btnClose2.Visibility = Visibility.Visible;
+        }
 
         private void LoadList(List<NXB> value)
         {
@@ -160,6 +166,12 @@ namespace WinForm.View
         private void txtSDT_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void btnClose2_Click(object sender, RoutedEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            parent.Close();
         }
     }
 }
