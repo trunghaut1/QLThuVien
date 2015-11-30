@@ -2,18 +2,10 @@
 using Core.Biz;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FlatTheme.ControlStyle;
 
 namespace WinForm.View
@@ -35,6 +27,15 @@ namespace WinForm.View
             LoadSearch(true, true, true);
             LoadTrangThai();
             LoadList(null);
+        }
+        public DauSachView(bool child)
+        {
+            InitializeComponent();
+            LoadComboBox(true, true, true);
+            LoadSearch(true, true, true);
+            LoadTrangThai();
+            LoadList(null);
+            if (child) btnClose2.Visibility = Visibility.Visible;
         }
 
         private void LoadList(List<DauSach> value)
@@ -199,7 +200,7 @@ namespace WinForm.View
             if (db.Add(record))
             {
                 MessageBox.Show("Thêm thành công");
-                LoadList(null);
+                btnResetS_Click(null, null);
                 dauSachDataGrid.SelectedIndex = dauSachDataGrid.Items.Count - 1;
                 dauSachDataGrid.ScrollIntoView(record);
             }
@@ -212,7 +213,6 @@ namespace WinForm.View
             if (record != null)
             {
                 if (!CheckNull()) return;
-                int index = dauSachDataGrid.SelectedIndex;
                 record.TenDauSach = txtTenDauSach.Text;
                 record.MaLoai = (int)cbxMaLoai.SelectedValue;
                 record.MaNXB = (int)cbxMaNXB.SelectedValue;
@@ -222,9 +222,7 @@ namespace WinForm.View
                 if (db.Update(record))
                 {
                     MessageBox.Show("Cập nhật thành công");
-                    LoadList(null);
-                    dauSachDataGrid.SelectedIndex = index;
-                    dauSachDataGrid.ScrollIntoView(record);
+                    btnResetS_Click(null, null);
                 }
                 else MessageBox.Show("Cập nhật thất bại");
             }
@@ -232,13 +230,48 @@ namespace WinForm.View
         }
         private void Search()
         {
-            //
-            //List<DauSach> record = db.Search(txtTenDauSach.Text, )
-            //LoadList(record);
+            int? maloai = null, nxb = null, tacgia = null, trangthai = null;
+            if (cbxMaLoaiS.SelectedIndex != -1)
+                maloai = (int)cbxMaLoaiS.SelectedValue;
+            if (cbxMaNXBS.SelectedIndex != -1)
+                nxb = (int)cbxMaNXBS.SelectedValue;
+            if (cbxMaTacGiaS.SelectedIndex != -1)
+                tacgia = (int)cbxMaTacGiaS.SelectedValue;
+            if (cbxMaTrangThaiS.SelectedIndex != -1)
+                trangthai = (int)cbxMaTrangThaiS.SelectedValue;
+            List<DauSach> record = db.Search(txtTenDauSachS.Text, maloai, nxb, tacgia, trangthai);
+            LoadList(record);
         }
         private void Search_KeyUp(object sender, KeyEventArgs e)
         {
             Search();
+        }
+
+        private void Search_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Search();
+        }
+
+        private void btnResetS_Click(object sender, RoutedEventArgs e)
+        {
+            var record = dauSachDataGrid.SelectedItem;
+            txtTenDauSachS.Text = null;
+            cbxMaLoaiS.SelectedIndex = -1;
+            cbxMaNXBS.SelectedIndex = -1;
+            cbxMaTacGiaS.SelectedIndex = -1;
+            cbxMaTrangThaiS.SelectedIndex = -1;
+            LoadList(null);
+            if (record != null)
+            {
+                dauSachDataGrid.SelectedItem = record;
+                dauSachDataGrid.ScrollIntoView(record);
+            }
+        }
+
+        private void btnClose2_Click(object sender, RoutedEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            parent.Close();
         }
     }
 }

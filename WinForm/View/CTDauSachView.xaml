@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WinForm.View.CTDauSachView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinForm.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Viewbox  Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Path Style="{DynamicResource DauSachIcon}"/>
+            </Viewbox>
+            <Label Content="CHI TIẾT ĐẦU SÁCH" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource MainColor}"/>
+        </StackPanel>
+        <Label Content="Mã đầu sách:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"/>
+        <Label x:Name="lblMaDauSach" Grid.Column="1" Grid.Row="1"/>
+        <Label Content="Tên đầu sách:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"/>
+        <Label x:Name="lblTenDauSach" Grid.Column="1" Grid.Row="2"/>
+        <Label Content="Loại sách:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right"/>
+        <Label x:Name="lblMaLoai" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Nhà xuất bản:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right"/>
+        <Label x:Name="lblMaNXB" Grid.Column="1" Grid.Row="4"/>
+        <Label Content="Tác giả:" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right"/>
+        <Label x:Name="lblMaTacGia" Grid.Column="1" Grid.Row="5"/>
+        <Label Content="Trạng thái:" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right"/>
+        <Label x:Name="lblMaTrangThai" Grid.Column="1" Grid.Row="6"/>
+        <Label Content="Tóm tắt:" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right"/>
+        <ScrollViewer Grid.Column="1" Grid.Row="7" Margin="5,5,20,10" VerticalScrollBarVisibility="Auto">
+            <TextBlock TextWrapping="Wrap" x:Name="lblTomTat" />
+        </ScrollViewer>
+        <Button x:Name="btnClose" Content="Thoát" Width="120" Height="40" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Click="btnClose_Click"/>
+    </Grid>
+</UserControl>

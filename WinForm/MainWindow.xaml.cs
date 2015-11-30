@@ -62,5 +62,13 @@ namespace WinForm
             iHome.SetResourceReference(StyleProperty, "DauSachIcon");
             this.Title = "ĐẦU SÁCH" + _title;
         }
+
+        private void mnCuonSach_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new CuonSachView());
+            iHome.SetResourceReference(StyleProperty, "CuonSachIcon");
+            this.Title = "CUỐN SÁCH" + _title;
+        }
     }
 }

@@ -26,6 +26,11 @@
                 <Button x:Name="btnDel" Content="Xóa" Width="120" Height="40" Margin="0 5" IsEnabled="False"/>
                 <Button x:Name="btnReset" Content="Làm mới" Width="120" Height="40" Margin="0 5" Click="btnReset_Click"/>
             </StackPanel>
+            <Button x:Name="btnClose2" Grid.Column="1" HorizontalAlignment="Right" Width="30" Height="30" Style="{DynamicResource CircleButton}" Margin="10 0" ToolTip="Thoát" Click="btnClose2_Click" Visibility="Hidden">
+                <Viewbox Width="15" Height="15">
+                    <Path Style="{DynamicResource CloseIcon}"/>
+                </Viewbox>
+            </Button>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -80,14 +85,14 @@
                 <Viewbox Width="30" Height="30" Margin="10 0">
                     <Path Data="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" Fill="{DynamicResource MainColor}" Stretch="Fill"/>
                 </Viewbox>
-                <TextBox Style="{DynamicResource FloatingHintTextBox}" Tag="Tên đầu sách" Margin="0 5 5 0" Width="250"/>
-                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaLoaiS" DisplayMemberPath="TenLoai" ItemsSource="{Binding}" SelectedValuePath="MaLoai" Tag="Loại đầu sách" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150"/>
-                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaNXBS" DisplayMemberPath="TenNXB" ItemsSource="{Binding}" SelectedValuePath="MaNXB" Tag="Nhà xuất bản" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="180"/>
-                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTacGiaS" DisplayMemberPath="TenTacGia" ItemsSource="{Binding}" SelectedValuePath="MaTacGia" Tag="Tác giả" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="180"/>
-                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTrangThaiS" DisplayMemberPath="TenTrangThai" ItemsSource="{Binding}" SelectedValuePath="MaTrangThai" Tag="Trạng thái" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150"/>
-                <Button Content="Khôi phục" Width="100" Height="35" Margin="5 0"/>
+                <TextBox x:Name="txtTenDauSachS" Style="{DynamicResource FloatingHintTextBox}" Tag="Tên đầu sách" Margin="0 5 5 0" Width="250" KeyUp="Search_KeyUp"/>
+                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaLoaiS" DisplayMemberPath="TenLoai" ItemsSource="{Binding}" SelectedValuePath="MaLoai" Tag="Loại sách" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150" SelectionChanged="Search_SelectionChanged"/>
+                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaNXBS" DisplayMemberPath="TenNXB" ItemsSource="{Binding}" SelectedValuePath="MaNXB" Tag="Nhà xuất bản" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="180" SelectionChanged="Search_SelectionChanged"/>
+                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTacGiaS" DisplayMemberPath="TenTacGia" ItemsSource="{Binding}" SelectedValuePath="MaTacGia" Tag="Tác giả" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="180" SelectionChanged="Search_SelectionChanged"/>
+                <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTrangThaiS" DisplayMemberPath="TenTrangThai" ItemsSource="{Binding}" SelectedValuePath="MaTrangThai" Tag="Trạng thái" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150" SelectionChanged="Search_SelectionChanged"/>
+                <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Margin="5 0" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid x:Name="dauSachDataGrid" IsReadOnly="True" IsSynchronizedWithCurrentItem="False" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dauSachDataGrid_SelectionChanged">
+            <DataGrid x:Name="dauSachDataGrid" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dauSachDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maDauSachColumn" Binding="{Binding MaDauSach}" Header="Mã đầu sách" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="tenDauSachColumn" Binding="{Binding TenDauSach}" Header="Tên đầu sách" Width="220"/>

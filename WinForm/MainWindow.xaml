@@ -59,7 +59,7 @@
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Cuốn sách">
+                    <MenuItem x:Name="mnCuonSach" Header="Cuốn sách" Click="mnCuonSach_Click">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <Path Style="{DynamicResource CuonSachIcon}"/>

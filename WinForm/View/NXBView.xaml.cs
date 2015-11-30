@@ -75,7 +75,7 @@ namespace WinForm.View
             if (db.Add(record))
             {
                 MessageBox.Show("Thêm thành công");
-                LoadList(null);
+                btnResetS_Click(null, null);
                 nXBDataGrid.SelectedIndex = nXBDataGrid.Items.Count - 1;
                 nXBDataGrid.ScrollIntoView(record);
             }
@@ -88,16 +88,13 @@ namespace WinForm.View
             if (record != null)
             {
                 if (!CheckNull()) return;
-                int index = nXBDataGrid.SelectedIndex;
                 record.TenNXB = txtTenNXB.Text;
                 record.SDT = txtSDT.Text;
                 record.DiaChi = txtDiaChi.Text;
                 if (db.Update(record))
                 {
                     MessageBox.Show("Cập nhật thành công");
-                    LoadList(null);
-                    nXBDataGrid.SelectedIndex = index;
-                    nXBDataGrid.ScrollIntoView(record);
+                    btnResetS_Click(null, null);
                 }
                 else MessageBox.Show("Cập nhật thất bại");
             }
@@ -123,7 +120,7 @@ namespace WinForm.View
                     if (db.Delete(record.MaNXB))
                     {
                         MessageBox.Show("Xóa thành công");
-                        LoadList(null);
+                        btnResetS_Click(null, null);
                         ResetAll();
                     }
                     else MessageBox.Show("Xóa thất bại");
@@ -150,12 +147,16 @@ namespace WinForm.View
 
         private void btnResetS_Click(object sender, RoutedEventArgs e)
         {
+            var record = nXBDataGrid.SelectedItem;
             txtTenNXBS.Text = null;
             txtSDTS.Text = null;
             txtDiaChiS.Text = null;
             LoadList(null);
-            nXBDataGrid.SelectedIndex = -1;
-            ResetAll();
+            if (record != null)
+            {
+                nXBDataGrid.SelectedItem = record;
+                nXBDataGrid.ScrollIntoView(record);
+            }
         }
         private static bool IsTextAllowed(string text)
         {

@@ -68,6 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\CTDauSachView.xaml.cs">
+      <DependentUpon>CTDauSachView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CuonSachView.xaml.cs">
+      <DependentUpon>CuonSachView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DauSachView.xaml.cs">
       <DependentUpon>DauSachView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +98,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\CTDauSachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CuonSachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DauSachView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +142,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Core.Dal.CuonSach.datasource" />
     <None Include="Properties\DataSources\Core.Dal.DauSach.datasource" />
     <None Include="Properties\DataSources\Core.Dal.LoaiSach.datasource" />
     <None Include="Properties\DataSources\Core.Dal.NXB.datasource" />

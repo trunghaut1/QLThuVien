@@ -67,7 +67,7 @@
                 <TextBox x:Name="txtDiaChiS" Style="{DynamicResource FloatingHintTextBox}" Tag="Địa chỉ" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp"/>
                 <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid IsReadOnly="True" IsSynchronizedWithCurrentItem="False" CanUserAddRows="False" x:Name="nXBDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="nXBDataGrid_SelectionChanged">
+            <DataGrid IsReadOnly="True" CanUserAddRows="False" x:Name="nXBDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="nXBDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maNXBColumn" Binding="{Binding MaNXB}" Header="Mã nhà xuất bản" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="tenNXBColumn" Binding="{Binding TenNXB}" Header="Tên nhà xuất bản" Width="280"/>

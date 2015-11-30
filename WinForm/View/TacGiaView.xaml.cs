@@ -64,7 +64,7 @@ namespace WinForm.View
             if (db.Add(record))
             {
                 MessageBox.Show("Thêm thành công");
-                LoadList(null);
+                btnResetS_Click(null, null);
                 tacGiaDataGrid.SelectedIndex = tacGiaDataGrid.Items.Count - 1;
                 tacGiaDataGrid.ScrollIntoView(record);
             }
@@ -77,15 +77,12 @@ namespace WinForm.View
             if (record != null)
             {
                 if (!CheckNull()) return;
-                int index = tacGiaDataGrid.SelectedIndex;
                 record.TenTacGia = txtTenTacGia.Text;
                 record.NoiCongTac = txtNoiCongTac.Text;
                 if (db.Update(record))
                 {
                     MessageBox.Show("Cập nhật thành công");
-                    LoadList(null);
-                    tacGiaDataGrid.SelectedIndex = index;
-                    tacGiaDataGrid.ScrollIntoView(record);
+                    btnResetS_Click(null, null);
                 }
                 else MessageBox.Show("Cập nhật thất bại");
             }
@@ -110,7 +107,7 @@ namespace WinForm.View
                     if (db.Delete(record.MaTacGia))
                     {
                         MessageBox.Show("Xóa thành công");
-                        LoadList(null);
+                        btnResetS_Click(null, null);
                         ResetAll();
                     }
                     else MessageBox.Show("Xóa thất bại");
@@ -137,11 +134,15 @@ namespace WinForm.View
 
         private void btnResetS_Click(object sender, RoutedEventArgs e)
         {
+            var record = tacGiaDataGrid.SelectedItem;
             txtNoiCongTacS.Text = null;
             txtTenTacGiaS.Text = null;
             LoadList(null);
-            tacGiaDataGrid.SelectedIndex = -1;
-            ResetAll();
+            if (record != null)
+            {
+                tacGiaDataGrid.SelectedItem = record;
+                tacGiaDataGrid.ScrollIntoView(record);
+            }
         }
 
         private void btnClose2_Click(object sender, RoutedEventArgs e)
