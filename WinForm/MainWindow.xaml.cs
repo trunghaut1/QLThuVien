@@ -70,5 +70,13 @@ namespace WinForm
             iHome.SetResourceReference(StyleProperty, "CuonSachIcon");
             this.Title = "CUỐN SÁCH" + _title;
         }
+
+        private void mnDocGia_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new DocGiaView());
+            iHome.SetResourceReference(StyleProperty, "DocGiaIcon");
+            this.Title = "ĐỘC GIẢ" + _title;
+        }
     }
 }

@@ -67,7 +67,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Quản lý độc giả">
+                <MenuItem x:Name="mnDocGia" Header="Quản lý độc giả" Click="mnDocGia_Click">
                     <MenuItem.Icon>
                         <Viewbox>
                             <Path Style="{DynamicResource DocGiaIcon}"/>

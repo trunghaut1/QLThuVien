@@ -77,6 +77,9 @@
     <Compile Include="View\DauSachView.xaml.cs">
       <DependentUpon>DauSachView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DocGiaView.xaml.cs">
+      <DependentUpon>DocGiaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoaiSachView.xaml.cs">
       <DependentUpon>LoaiSachView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DauSachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DocGiaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +151,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Core.Dal.CuonSach.datasource" />
     <None Include="Properties\DataSources\Core.Dal.DauSach.datasource" />
+    <None Include="Properties\DataSources\Core.Dal.DocGia.datasource" />
     <None Include="Properties\DataSources\Core.Dal.LoaiSach.datasource" />
     <None Include="Properties\DataSources\Core.Dal.NXB.datasource" />
     <None Include="Properties\DataSources\Core.Dal.TacGia.datasource" />
