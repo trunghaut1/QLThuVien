@@ -80,6 +80,20 @@
                             <Path Style="{DynamicResource ThongKeIcon}"/>
                         </Viewbox>
                     </MenuItem.Icon>
+                    <MenuItem x:Name="mnTKCuonSach" Header="Số cuốn sách" Click="mnTKCuonSach_Click">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource ThongKeIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Tác giả sách">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource ThongKeIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
