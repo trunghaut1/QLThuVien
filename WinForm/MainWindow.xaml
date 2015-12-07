@@ -87,7 +87,7 @@
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Tác giả sách">
+                    <MenuItem x:Name="mnTKTacGia" Header="Tác giả sách" Click="mnTKTacGia_Click">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <Path Style="{DynamicResource ThongKeIcon}"/>

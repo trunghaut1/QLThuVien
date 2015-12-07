@@ -277,6 +277,8 @@
     <Style x:Key="FlatDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
         <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MainColorLight}"/>
         <Setter Property="BorderThickness" Value="1"/>

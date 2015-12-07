@@ -7,11 +7,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
 using FlatTheme.ControlStyle;
 using COMExcel = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace WinForm.View
 {
@@ -21,7 +21,6 @@ namespace WinForm.View
     public partial class TKCuonSachView : UserControl
     {
         BizDauSach _dausach = new BizDauSach();
-        BizCuonSach _cuonsach = new BizCuonSach();
         public TKCuonSachView()
         {
             InitializeComponent();
@@ -50,16 +49,6 @@ namespace WinForm.View
         {
             if (!String.IsNullOrEmpty(txtMaDauSach.Text)) cbxDauSach.IsEnabled = false;
             else cbxDauSach.IsEnabled = true;
-        }
-        private static bool IsTextAllowed(string text)
-        {
-            Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
-            return !regex.IsMatch(text);
-        }
-
-        private void txtMaDauSach_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
         }
 
         private void btnFind_Click(object sender, RoutedEventArgs e)
@@ -133,27 +122,70 @@ namespace WinForm.View
             if(!String.IsNullOrEmpty(txtMaDauSach1.Text))
             {
                 var record = _dausach.GetByID(int.Parse(txtMaDauSach1.Text));
-                try
-                {
-                    COMExcel.Application exApp = new COMExcel.Application();
-                    string workbookPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resource\BCCuonSach.xlsx");
-                    COMExcel.Workbook exBook = exApp.Workbooks.Open(workbookPath,
-                            0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "",
-                            true, false, 0, true, false, false);
-                    COMExcel.Worksheet exSheet = (COMExcel.Worksheet)exBook.Worksheets[1];
-                    exSheet.Activate();
-                    exSheet.Cells[3, 2] = record.MaDauSach.ToString();
-                    exSheet.Cells[4, 2] = record.TenDauSach;
-                    exSheet.Cells[5, 2] = record.LoaiSach.TenLoai;
-                    exSheet.Cells[6, 2] = record.NXB.TenNXB;
-                    exSheet.Cells[7, 2] = record.TacGia.TenTacGia;
-                    exSheet.Cells[8, 2] = record.CuonSach.Count;
-                    exBook.Save();
-                    exApp.Quit();
-                }
-                catch (Exception ex) { MessageBox.Show("Lỗi xuất báo cáo" + ex); }
+                if(!WriteExcel(record))
+                    MessageBox.Show("Lỗi xuất báo cáo");
             }
             else MessageBox.Show("Vui lòng nhập hoặc chọn đầu sách");
+        }
+        private bool WriteExcel(DauSach record)
+        {
+            try
+            {
+                COMExcel.Application exApp = new COMExcel.Application();
+                string workbookPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resource\BCCuonSach.xlsx");
+                COMExcel.Workbook exBook = exApp.Workbooks.Open(workbookPath,
+                        0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "",
+                        true, false, 0, true, false, false);
+                COMExcel.Worksheet exSheet = (COMExcel.Worksheet)exBook.Worksheets[1];
+                exSheet.Activate();
+                exSheet.Cells[3, 3] = record.MaDauSach.ToString();
+                exSheet.Cells[4, 3] = record.TenDauSach;
+                exSheet.Cells[5, 3] = record.LoaiSach.TenLoai;
+                exSheet.Cells[6, 3] = record.NXB.TenNXB;
+                exSheet.Cells[7, 3] = record.TacGia.TenTacGia;
+                exSheet.Cells[8, 3] = record.CuonSach.Count;
+                // Xuất danh sách
+                int i = 1;
+                foreach(CuonSach item in record.CuonSach)
+                {
+                    exSheet.Cells[11 + i, 1] = i;
+                    exSheet.Cells[11 + i, 2] = item.MaCuonSach;
+                    exSheet.Cells[11 + i, 3] = item.TinhTrangCuonSach.TenTinhTrang;
+                    i++;
+                }
+                //
+                i = i + 10;
+                COMExcel.Range r = (COMExcel.Range)exSheet.get_Range("A12", "C" + i);
+                r.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+                r.Borders.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Black);
+                // Lưu file
+                SaveFileDialog dialog = new SaveFileDialog { FileName = "BCCuonSach.xls", Filter = "Excel files|*.xls", DefaultExt = "xls", Title = "Chọn nơi lưu tệp báo cáo" };
+                if (dialog.ShowDialog() == true)
+                {
+                    exBook.SaveAs(dialog.FileName, COMExcel.XlFileFormat.xlWorkbookNormal,
+                                    null, null, false, false,
+                                    COMExcel.XlSaveAsAccessMode.xlExclusive,
+                                    false, false, false, false, false);
+                    MessageBox.Show("Xuất báo cáo thành công");
+                }
+                //
+                exBook.Close(false, false, false);
+                exApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(exBook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(exApp);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private void txtMaDauSach_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            int key = (int)e.Key;
+            e.Handled = !(key >= 34 && key <= 43 || key >= 74 && key <= 83 ||
+                key == 2 || key == 6 || key == 23 || key == 25 || key == 32);
         }
     }
 }

@@ -1,0 +1,69 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinForm.View"
+             xmlns:Dal="clr-namespace:Core.Dal;assembly=Core" x:Class="WinForm.View.TKTacGiaView"
+             mc:Ignorable="d" 
+             d:DesignHeight="577" d:DesignWidth="1164">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="dauSachViewSource" d:DesignSource="{d:DesignInstance {x:Type Dal:DauSach}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="THỐNG KÊ TÁC GIẢ SÁCH" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26.667"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
+            <Label Content="Nhập mã tác giả: "/>
+            <TextBox x:Name="txtMaTacGia" Width="150" Margin="5 0" KeyUp="txtMaTacGia_KeyUp" PreviewKeyDown="txtMaTacGia_PreviewKeyDown"/>
+            <Label Content="hoặc chọn tác giả:"/>
+            <ComboBox x:Name="cbxTacGia" IsEditable="True" Width="350" DisplayMemberPath="TenTacGia" ItemsSource="{Binding}" SelectedValuePath="MaTacGia" Tag="Tác giả" Margin="5 0" SelectionChanged="cbxTacGia_SelectionChanged"/>
+            <Button x:Name="btnFind" Content="Tìm" Width="100" Margin="10 0" Height="35" IsDefault="True" Click="btnFind_Click"/>
+            <Button x:Name="btnReset" Content="Làm mới" Width="100" Margin="5 0" Height="35" Click="btnReset_Click"/>
+        </StackPanel>
+        <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Mã tác giả:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="txtMaTacGia1"  Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10 0"/>
+            <Label Content="Tên tác giả:" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="txtTenTacGia"  Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" Margin="10 0"/>
+            <Label Content="Số đầu sách:" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="txtSL"  Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" Margin="10 0"/>
+            <Label Content="Nơi công tác:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="txtNoiCongTac"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10 0"/>
+        </Grid>
+        <Grid Grid.Row="3" DataContext="{StaticResource dauSachViewSource}">
+
+            <DataGrid x:Name="dauSachDataGrid" IsReadOnly="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="0 5 0 5" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="maDauSachColumn" Width="SizeToHeader" Header="Mã đầu sách" Binding="{Binding MaDauSach}"/>
+                    <DataGridTextColumn x:Name="tenDauSachColumn" Width="300" Header="Tên đầu sách" Binding="{Binding TenDauSach}"/>
+                    <DataGridTextColumn x:Name="maLoaiColumn" Width="120" Header="Loại sách" Binding="{Binding LoaiSach.TenLoai}"/>
+                    <DataGridTextColumn x:Name="maNXBColumn" Width="200" Header="Nhà xuất bản" Binding="{Binding NXB.TenNXB}"/>
+                    <DataGridTextColumn x:Name="maTrangThaiColumn" Width="150" Header="Trạng thái" Binding="{Binding TrangThaiDauSach.TenTrangThai}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <StackPanel Grid.Row="4" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnDetail" Content="Chi tiết đầu sách" Height="40" Width="160" Margin="10 0" Click="btnDetail_Click"/>
+            <Button x:Name="btnReport" Content="Xuất báo cáo (.xls)" Height="40" Width="160" Margin="10 0" Click="btnReport_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

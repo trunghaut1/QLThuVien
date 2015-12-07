@@ -92,7 +92,7 @@
                 <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTrangThaiS" DisplayMemberPath="TenTrangThai" ItemsSource="{Binding}" SelectedValuePath="MaTrangThai" Tag="Trạng thái" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150" SelectionChanged="Search_SelectionChanged"/>
                 <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Margin="5 0" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid x:Name="dauSachDataGrid" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dauSachDataGrid_SelectionChanged">
+            <DataGrid x:Name="dauSachDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="dauSachDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maDauSachColumn" Binding="{Binding MaDauSach}" Header="Mã đầu sách" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="tenDauSachColumn" Binding="{Binding TenDauSach}" Header="Tên đầu sách" Width="220"/>

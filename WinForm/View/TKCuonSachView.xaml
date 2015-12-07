@@ -20,11 +20,11 @@
         <Label Content="THỐNG KÊ CUỐN SÁCH THEO ĐẦU SÁCH" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26.667"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
             <Label Content="Nhập mã đầu sách: "/>
-            <TextBox x:Name="txtMaDauSach" Width="150" KeyUp="txtMaDauSach_KeyUp" PreviewTextInput="txtMaDauSach_PreviewTextInput" Margin="5 0"/>
+            <TextBox x:Name="txtMaDauSach" Width="150" KeyUp="txtMaDauSach_KeyUp" Margin="5 0" PreviewKeyDown="txtMaDauSach_PreviewKeyDown"/>
             <Label Content="hoặc chọn đầu sách:"/>
             <ComboBox x:Name="cbxDauSach" IsEditable="True" Width="350" DisplayMemberPath="TenDauSach" ItemsSource="{Binding}" SelectedValuePath="MaDauSach" Tag="Đầu sách" SelectionChanged="cbxDauSach_SelectionChanged" Margin="5 0"/>
             <Button x:Name="btnFind" Content="Tìm" Width="100" Margin="10 0" Height="35" IsDefault="True" Click="btnFind_Click"/>
-            <Button x:Name="btnReset" Content="Khôi phục" Width="100" Margin="5 0" Height="35" Click="btnReset_Click"/>
+            <Button x:Name="btnReset" Content="Làm mới" Width="100" Margin="5 0" Height="35" Click="btnReset_Click"/>
         </StackPanel>
         <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.Row="1" VerticalAlignment="Bottom"/>
         <Grid Grid.Row="2">
@@ -69,8 +69,8 @@
             <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <StackPanel Grid.Row="4" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="btnDetail" Content="Chi tiết đầu sách" Height="40" Width="150" Margin="10 0" Click="btnDetail_Click"/>
-            <Button x:Name="btnReport" Content="Xuất báo cáo" Height="40" Width="150" Margin="10 0" Click="btnReport_Click"/>
+            <Button x:Name="btnDetail" Content="Chi tiết đầu sách" Height="40" Width="160" Margin="10 0" Click="btnDetail_Click"/>
+            <Button x:Name="btnReport" Content="Xuất báo cáo (.xls)" Height="40" Width="160" Margin="10 0" Click="btnReport_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

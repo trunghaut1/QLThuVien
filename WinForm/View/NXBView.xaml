@@ -47,7 +47,7 @@
                 <Label Content="Tên nhà xuất bản:" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtTenNXB" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" Margin="10 0" />
                 <Label Content="Số điện thoại:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtSDT" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="10 0" PreviewTextInput="txtSDT_PreviewTextInput" />
+                <TextBox x:Name="txtSDT" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="10 0" PreviewKeyDown="txtSDT_PreviewKeyDown" />
                 <Label Content="Địa chỉ:" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtDiaChi" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" Margin="10 0" Height="50" TextWrapping="Wrap" />
             </Grid>
@@ -63,11 +63,11 @@
                     <Path Data="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" Fill="{DynamicResource MainColor}" Stretch="Fill"/>
                 </Viewbox>
                 <TextBox x:Name="txtTenNXBS" Style="{DynamicResource FloatingHintTextBox}" Tag="Tên nhà xuất bản" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp"/>
-                <TextBox x:Name="txtSDTS" Style="{DynamicResource FloatingHintTextBox}" Tag="Số điện thoại" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp"/>
+                <TextBox x:Name="txtSDTS" Style="{DynamicResource FloatingHintTextBox}" Tag="Số điện thoại" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp" PreviewKeyDown="txtSDTS_PreviewKeyDown"/>
                 <TextBox x:Name="txtDiaChiS" Style="{DynamicResource FloatingHintTextBox}" Tag="Địa chỉ" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp"/>
                 <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid IsReadOnly="True" CanUserAddRows="False" x:Name="nXBDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="nXBDataGrid_SelectionChanged">
+            <DataGrid IsReadOnly="True" x:Name="nXBDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="nXBDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maNXBColumn" Binding="{Binding MaNXB}" Header="Mã nhà xuất bản" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="tenNXBColumn" Binding="{Binding TenNXB}" Header="Tên nhà xuất bản" Width="280"/>

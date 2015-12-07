@@ -63,7 +63,7 @@
                 <TextBox x:Name="txtNoiCongTacS" Style="{DynamicResource FloatingHintTextBox}" Tag="Nơi công tác" Margin="0 4 10 0" Width="250" KeyUp="Search_KeyUp"/>
                 <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid Grid.Row="1" x:Name="tacGiaDataGrid" CanUserAddRows="False" IsReadOnly="True" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" SelectionChanged="tacGiaDataGrid_SelectionChanged">
+            <DataGrid Grid.Row="1" x:Name="tacGiaDataGrid" IsReadOnly="True" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" SelectionChanged="tacGiaDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maTacGiaColumn" Width="100" Header="Mã tác giả" Binding="{Binding MaTacGia}"/>
                     <DataGridTextColumn x:Name="tenTacGiaColumn" Width="250" Header="Tên tác giả" Binding="{Binding TenTacGia}"/>

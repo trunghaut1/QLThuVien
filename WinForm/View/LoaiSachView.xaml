@@ -48,7 +48,7 @@
             <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="1" DataContext="{StaticResource loaiSachViewSource}">
-            <DataGrid x:Name="loaiSachDataGrid" Margin="0 5 0 0" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="loaiSachDataGrid_SelectionChanged">
+            <DataGrid x:Name="loaiSachDataGrid" Margin="0 5 0 0" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="loaiSachDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maLoaiColumn" Width="100" Header="Mã loại" Binding="{Binding MaLoai}"/>
                     <DataGridTextColumn x:Name="tenLoaiColumn" Width="300" Header="Tên loại" Binding="{Binding TenLoai}"/>

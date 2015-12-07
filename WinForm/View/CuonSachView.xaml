@@ -54,7 +54,7 @@
                         <Path Style="{DynamicResource AddIcon}"/>
                     </Viewbox>
                 </Button>
-                <Button x:Name="btnDetail" Content="Chi tiết" Width="120" Height="40" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" Click="btnDetail_Click"/>
+                <Button x:Name="btnDetail" Content="Chi tiết đầu sách" Width="150" Height="40" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" Click="btnDetail_Click"/>
             </Grid>
             <Border BorderBrush="{DynamicResource MainColorExtraLight}" BorderThickness="0 0 0 1" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
         </Grid>
@@ -71,7 +71,7 @@
                 <ComboBox Style="{DynamicResource FloatingHintComboBox}" IsEditable="True" x:Name="cbxMaTinhTrangS" DisplayMemberPath="TenTinhTrang" ItemsSource="{Binding}" SelectedValuePath="MaTinhTrang" Tag="Tình trạng" Grid.Column="1" Grid.Row="1" Margin="5 0" VerticalAlignment="Center" Width="150" SelectionChanged="Search_SelectionChanged"/>
                 <Button x:Name="btnResetS" Content="Khôi phục" Width="100" Height="35" Margin=" 5 0" Click="btnResetS_Click"/>
             </StackPanel>
-            <DataGrid x:Name="cuonSachDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="cuonSachDataGrid_SelectionChanged">
+            <DataGrid x:Name="cuonSachDataGrid" Margin="0 2 0 0" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="cuonSachDataGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="maCuonSachColumn" Binding="{Binding MaCuonSach}" Header="Mã cuốn sách" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="maDauSachColumn" Binding="{Binding DauSach.TenDauSach}" Header="Đầu sách" Width="500"/>

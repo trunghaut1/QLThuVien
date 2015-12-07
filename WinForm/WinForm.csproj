@@ -95,6 +95,9 @@
     <Compile Include="View\TKCuonSachView.xaml.cs">
       <DependentUpon>TKCuonSachView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TKTacGiaView.xaml.cs">
+      <DependentUpon>TKTacGiaView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +142,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TKTacGiaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -171,6 +178,9 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Resource\BCCuonSach.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\BCTacGia.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

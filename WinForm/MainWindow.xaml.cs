@@ -86,5 +86,13 @@ namespace WinForm
             iHome.SetResourceReference(StyleProperty, "ThongKeIcon");
             this.Title = "THỐNG KÊ SỐ CUỐN SÁCH" + _title;
         }
+
+        private void mnTKTacGia_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new TKTacGiaView());
+            iHome.SetResourceReference(StyleProperty, "ThongKeIcon");
+            this.Title = "THỐNG KÊ TÁC GIẢ SÁCH" + _title;
+        }
     }
 }
