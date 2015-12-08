@@ -141,7 +141,7 @@ namespace WinForm.View
                         0, false, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "",
                         true, false, 0, true, false, false);
                 COMExcel.Worksheet exSheet = (COMExcel.Worksheet)exBook.Worksheets[1];
-                exSheet.Activate();
+                ((Microsoft.Office.Interop.Excel._Worksheet)exSheet).Activate();
                 exSheet.Cells[3, 3] = record.MaTacGia.ToString();
                 exSheet.Cells[4, 3] = record.NoiCongTac;
                 exSheet.Cells[3, 5] = record.TenTacGia;
@@ -182,6 +182,7 @@ namespace WinForm.View
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
