@@ -17,6 +17,7 @@ namespace Core.Dal
         public int ID { get; set; }
         public int MaPhieuMuon { get; set; }
         public int MaCuonSach { get; set; }
+        public Nullable<bool> DaTra { get; set; }
     
         public virtual CuonSach CuonSach { get; set; }
         public virtual PhieuMuon PhieuMuon { get; set; }

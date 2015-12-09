@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaPhieuMuon" Type="int" Nullable="false" />
           <Property Name="MaCuonSach" Type="int" Nullable="false" />
+          <Property Name="DaTra" Type="bit" />
         </EntityType>
         <EntityType Name="CTPhieuTra">
           <Key>
@@ -332,6 +333,7 @@
           <Property Name="MaCuonSach" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CuonSach" Relationship="Self.FK_CTPhieuMuon_CuonSach" FromRole="CTPhieuMuon" ToRole="CuonSach" />
           <NavigationProperty Name="PhieuMuon" Relationship="Self.FK_CTPhieuMuon_PhieuMuon" FromRole="CTPhieuMuon" ToRole="PhieuMuon" />
+          <Property Name="DaTra" Type="Boolean" />
         </EntityType>
         <EntityType Name="CTPhieuTra">
           <Key>
@@ -666,6 +668,7 @@
           <EntitySetMapping Name="CTPhieuMuon">
             <EntityTypeMapping TypeName="QLThuVienModel.CTPhieuMuon">
               <MappingFragment StoreEntitySet="CTPhieuMuon">
+                <ScalarProperty Name="DaTra" ColumnName="DaTra" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MaPhieuMuon" ColumnName="MaPhieuMuon" />
                 <ScalarProperty Name="MaCuonSach" ColumnName="MaCuonSach" />

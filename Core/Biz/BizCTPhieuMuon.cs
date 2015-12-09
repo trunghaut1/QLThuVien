@@ -10,13 +10,14 @@ namespace Core.Biz
         QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy chi tiết phiếu mượn theo mã phiếu mượn
         // >> Dùng hàm Search
-        public List<CTPhieuMuon> Search(int? maphieumuon, int? macuonsach)
+        public List<CTPhieuMuon> Search(int? maphieumuon, int? macuonsach, bool? datra)
         {
             try
             {
                 var record = from r in _db.CTPhieuMuon select r;
                 if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);
                 if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
+                if (datra != null) record = record.Where(r => r.DaTra.Value == datra.Value);
                 return record.ToList();
             }
             catch (Exception e)
@@ -64,7 +65,8 @@ namespace Core.Biz
             try
             {
                 CTPhieuMuon record = _db.CTPhieuMuon.SingleOrDefault(v => v.ID == value.ID);
-                record.MaCuonSach = value.MaCuonSach;
+                //record.MaCuonSach = value.MaCuonSach;
+                record.DaTra = value.DaTra;
                 _db.SaveChanges();
                 return true;
             }
