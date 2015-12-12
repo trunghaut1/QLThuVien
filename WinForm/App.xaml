@@ -19,6 +19,13 @@
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
             </Style>
+            <Style x:Key="DefaultText" TargetType="{x:Type Label}">
+                <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+            </Style>
+            <Style x:Key="ErrorText" TargetType="{x:Type Label}">
+                <Setter Property="Foreground" Value="{DynamicResource ErrorColor}"/>
+            </Style>
+
             <Style x:Key="PathIcon" TargetType="Path">
                 <Setter Property="Fill" Value="{DynamicResource MainColor}"/>
                 <Setter Property="Stretch" Value="Fill"/>

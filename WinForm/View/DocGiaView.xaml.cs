@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
+using System.Windows.Media;
 
 namespace WinForm.View
 {
@@ -53,6 +54,7 @@ namespace WinForm.View
             var record = (DocGia)docGiaDataGrid.SelectedItem;
             if (record != null)
             {
+                var now = DateTime.Now;
                 cbxNamTotNghiep.IsEnabled = true;
                 txtMaDocGia.Text = record.MaDocGia.ToString();
                 txtTenDocGia.Text = record.TenDocGia;
@@ -64,6 +66,17 @@ namespace WinForm.View
                 cbxNamTotNghiep.SelectedValue = record.NamTotNgiep;
                 txtNgayCap.Text = record.NgayCap.Value.ToShortDateString();
                 txtNgayHetHan.Text = record.NgayHetHan.Value.ToShortDateString();
+                if(now >= record.NgayHetHan)
+                {
+                    lblStatus.Content = "(Đã hết hạn)";
+                    lblStatus.SetResourceReference(StyleProperty, "ErrorText");
+                }
+                else
+                {
+                    int count = (int)(record.NgayHetHan - now).Value.TotalDays;
+                    lblStatus.Content = "(Còn " + count + " ngày)";
+                    lblStatus.SetResourceReference(StyleProperty, "DefaultText");
+                }
             }
         }
         private bool CheckNull()
