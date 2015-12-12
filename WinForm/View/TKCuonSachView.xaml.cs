@@ -99,7 +99,7 @@ namespace WinForm.View
 
         private void btnDetail_Click(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(txtMaDauSach1.Text))
+            if (!String.IsNullOrEmpty(txtMaDauSach1.Text))
             {
                 var record = _dausach.GetByID(int.Parse(txtMaDauSach1.Text));
                 FlatWindow window = new FlatWindow()
@@ -115,6 +115,7 @@ namespace WinForm.View
                 window.Style = Application.Current.FindResource("FlatWindow") as Style;
                 window.ShowDialog();
             }
+            else MessageBox.Show("Vui lòng chọn đầu sách");
         }
 
         private void btnReport_Click(object sender, RoutedEventArgs e)

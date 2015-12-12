@@ -165,6 +165,7 @@ namespace WinForm.View
                 window.Style = Application.Current.FindResource("FlatWindow") as Style;
                 window.ShowDialog();
             }
+            else MessageBox.Show("Vui lòng chọn đầu sách");
         }
         private void Search()
         {
