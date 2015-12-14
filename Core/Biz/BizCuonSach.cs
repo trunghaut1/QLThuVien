@@ -8,6 +8,78 @@ namespace Core.Biz
     public class BizCuonSach
     {
         QLThuVienEntities _db = new QLThuVienEntities();
+        Tool tool = new Tool();
+        //SeachTheoTen_List
+        public int demsach_search(String Name)
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai }).ToList();
+            temp = temp.Where(v => v.TenDauSach.Contains(Name)).ToList();
+            return temp.Count;
+        }
+        //lay ds theo trang
+        public System.Data.DataTable GetByPageLinq(int pageSize, int pageNum)
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        select new {a.MaCuonSach,b.TenDauSach,c.TenLoai,e.TenNXB,g.TenTacGia ,d.TenTrangThai}).ToList();
+            var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            System.Data.DataTable data = tool.LinqToDataTable(list);          
+            return data;
+        }
+        //Search_PhanTrang
+        public System.Data.DataTable Search_GetByPageLinq(String name,int pageSize, int pageNum)
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai });
+            temp = temp.Where(v => v.TenDauSach.Contains(name)).OrderBy(v => v.TenDauSach);
+            var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            System.Data.DataTable data = tool.LinqToDataTable(list);
+            return data;
+        }
+        //layallfullinf
+        public System.Data.DataTable GetallBylinq()
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai }).ToList();
+
+            System.Data.DataTable data = tool.LinqToDataTable(temp);
+            return data;
+        }
+        //search byID
+        public System.Data.DataTable searchbyid(int id)
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        where a.MaCuonSach.Equals(id)
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai }).ToList();
+
+            System.Data.DataTable data = tool.LinqToDataTable(temp);
+            return data;
+        }
         // Lấy danh sách cuốn sách
         public List<CuonSach> GetAll()
         {

@@ -13,7 +13,7 @@ namespace Core.Biz
         {
             try
             {
-                return _db.PhieuMuon.ToList();
+                return _db.PhieuMuon.OrderBy(e => e.NgayMuon).ToList();
             }
             catch (Exception e)
             {

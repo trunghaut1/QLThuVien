@@ -2,18 +2,51 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using PagedList;
 namespace Core.Biz
 {
     public class BizDocGia
     {
         QLThuVienEntities _db = new QLThuVienEntities();
+        //phantrang+List
+        public List<DocGia> GetByPageLinq(int pageSize, int pageNum)
+        {
+            var temp = (from a in _db.DocGia orderby a.NgayCap select a).ToList();
+
+
+            var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            return list;
+        }
+        public List<DocGia> _GetByPageLinq(String name,int pageSize, int pageNum)
+        {
+            var temp = from a in _db.DocGia   select a;
+            temp = temp.Where(v => v.TenDocGia.Contains(name)).OrderBy(v => v.MaDocGia);      
+            var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            return list;
+        }
         // Lấy danh sách độc giả
         public List<DocGia> GetAll()
         {
             try
             {
                 return _db.DocGia.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        //laydsDGtheoID
+        public List<DocGia> GetListByID(int ma)
+        {
+            try
+            {
+
+                var query = from c in _db.DocGia
+                            where c.MaDocGia == ma
+                            select c;
+                return query.ToList();
             }
             catch (Exception e)
             {
@@ -114,5 +147,7 @@ namespace Core.Biz
                 return null;
             }
         }
+       
+           
     }
 }

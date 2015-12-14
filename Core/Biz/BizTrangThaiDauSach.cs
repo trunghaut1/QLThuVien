@@ -8,6 +8,7 @@ namespace Core.Biz
     public class BizTrangThaiDauSach
     {
         QLThuVienEntities _db = new QLThuVienEntities();
+       
         // Lấy danh sách trạng thái đầu sách
         public List<TrangThaiDauSach> GetAll()
         {
