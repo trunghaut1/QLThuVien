@@ -7,12 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using FlatTheme.ControlStyle;
 using COMExcel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using Microsoft.Win32;
-using System.IO;
 
 namespace WinForm.View
 {
@@ -50,6 +48,11 @@ namespace WinForm.View
             cbxTacGia.SelectedIndex = -1;
             txtMaTacGia.IsEnabled = true;
             cbxTacGia.IsEnabled = true;
+            dauSachDataGrid.ItemsSource = null;
+            txtMaTacGia1.Text = null;
+            txtTenTacGia.Text = null;
+            txtNoiCongTac.Text = null;
+            txtSL.Text = null;
         }
 
         private void txtMaTacGia_PreviewKeyDown(object sender, KeyEventArgs e)

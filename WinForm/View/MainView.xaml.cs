@@ -101,5 +101,10 @@ namespace WinForm.View
         {
             main.LoadTKTacGia();
         }
+
+        private void btnTKDocGia_Click(object sender, RoutedEventArgs e)
+        {
+            main.LoadTKDocGia();
+        }
     }
 }

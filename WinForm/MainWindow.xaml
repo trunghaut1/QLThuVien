@@ -96,6 +96,13 @@
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem x:Name="mnTKDocGia" Header="Độc giả" Click="mnTKDocGia_Click">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <Path Style="{DynamicResource ThongKeIcon}"/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">

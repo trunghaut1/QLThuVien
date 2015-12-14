@@ -57,17 +57,19 @@
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnLoaiSach" Height="45" Width="200" Content="Tổng loại sách: " Grid.Row="0" Click="btnLoaiSach_Click"/>
-            <Button x:Name="btnTacGia" Height="45" Width="200" Content="Tổng tác giả: " Grid.Row="1" Click="btnTacGia_Click"/>
-            <Button x:Name="btnNXB" Height="45" Width="200" Content="Tổng nhà xuất bản: " Grid.Row="2" Click="btnNXB_Click"/>
+            <Button x:Name="btnLoaiSach" Height="45" Width="200" Content="Tổng loại sách: " Grid.Row="0" Click="btnLoaiSach_Click" />
+            <Button x:Name="btnTacGia" Height="45" Width="200" Content="Tổng tác giả: " Grid.Row="1" Click="btnTacGia_Click" />
+            <Button x:Name="btnNXB" Height="45" Width="200" Content="Tổng nhà xuất bản: " Grid.Row="2" Click="btnNXB_Click" />
             <Button x:Name="btnTKCuonSach" Height="45" Width="200" Content="Thống kê cuốn sách" Grid.Row="3" Click="btnTKCuonSach_Click"/>
             <Button x:Name="btnTKTacGia" Height="45" Width="200" Content="Thống kê tác giả sách" Grid.Row="4" Click="btnTKTacGia_Click"/>
+            <Button x:Name="btnTKDocGia" Height="45" Width="200" Content="Thống kê độc giả" Grid.Row="5" Click="btnTKDocGia_Click"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resource\TKDocGia.cs" />
     <Compile Include="View\CTDauSachView.xaml.cs">
       <DependentUpon>CTDauSachView.xaml</DependentUpon>
     </Compile>
@@ -98,6 +99,9 @@
     </Compile>
     <Compile Include="View\TKCuonSachView.xaml.cs">
       <DependentUpon>TKCuonSachView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TKDocGiaView.xaml.cs">
+      <DependentUpon>TKDocGiaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TKTacGiaView.xaml.cs">
       <DependentUpon>TKTacGiaView.xaml</DependentUpon>
@@ -150,6 +154,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TKDocGiaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TKTacGiaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +194,9 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Resource\BCCuonSach.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resource\BCDocGia.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resource\BCTacGia.xlsx">

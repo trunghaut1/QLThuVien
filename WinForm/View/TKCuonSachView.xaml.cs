@@ -43,6 +43,13 @@ namespace WinForm.View
             cbxDauSach.SelectedIndex = -1;
             txtMaDauSach.IsEnabled = true;
             cbxDauSach.IsEnabled = true;
+            cuonSachDataGrid.ItemsSource = null;
+            txtMaDauSach1.Text = null;
+            txtMaLoai.Text = null;
+            txtTenDauSach.Text = null;
+            txtNXB.Text = null;
+            txtTacGia.Text = null;
+            txtSL.Text = null;
         }
 
         private void txtMaDauSach_KeyUp(object sender, KeyEventArgs e)

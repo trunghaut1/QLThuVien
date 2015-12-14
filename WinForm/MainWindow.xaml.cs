@@ -135,5 +135,17 @@ namespace WinForm
             iHome.SetResourceReference(StyleProperty, "DauSachIcon");
             this.Title = "QUẢN LÝ THƯ VIỆN";
         }
+        internal void LoadTKDocGia()
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new TKDocGiaView());
+            iHome.SetResourceReference(StyleProperty, "ThongKeIcon");
+            this.Title = "THỐNG KÊ ĐỘC GIẢ" + _title;
+        }
+
+        private void mnTKDocGia_Click(object sender, RoutedEventArgs e)
+        {
+            LoadTKDocGia();
+        }
     }
 }
