@@ -96,6 +96,15 @@
           <Property Name="TenTacGia" Type="nvarchar" MaxLength="256" />
           <Property Name="NoiCongTac" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="MaDocGia" />
+            <PropertyRef Name="MaCuonSach" />
+          </Key>
+          <Property Name="MaDocGia" Type="int" Nullable="false" />
+          <Property Name="MaCuonSach" Type="int" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="TinhTrangCuonSach">
           <Key>
             <PropertyRef Name="MaTinhTrang" />
@@ -269,6 +278,7 @@
           <EntitySet Name="PhieuMuon" EntityType="Self.PhieuMuon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhieuTra" EntityType="Self.PhieuTra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Temp" EntityType="Self.Temp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TinhTrangCuonSach" EntityType="Self.TinhTrangCuonSach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrangThaiDauSach" EntityType="Self.TrangThaiDauSach" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CTPhieuMuon_CuonSach" Association="Self.FK_CTPhieuMuon_CuonSach">
@@ -646,6 +656,7 @@
             <End Role="TacGia" EntitySet="TacGia" />
             <End Role="DauSach" EntitySet="DauSach" />
           </AssociationSet>
+          <EntitySet Name="Temp" EntityType="QLThuVienModel.Temp" />
         </EntityContainer>
         <Association Name="FK_DauSach_TacGia">
           <End Type="QLThuVienModel.TacGia" Role="TacGia" Multiplicity="0..1" />
@@ -659,6 +670,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="MaDocGia" />
+            <PropertyRef Name="MaCuonSach" />
+          </Key>
+          <Property Name="MaDocGia" Type="Int32" Nullable="false" />
+          <Property Name="MaCuonSach" Type="Int32" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -779,6 +799,15 @@
               <MappingFragment StoreEntitySet="TrangThaiDauSach">
                 <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
                 <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temp">
+            <EntityTypeMapping TypeName="QLThuVienModel.Temp">
+              <MappingFragment StoreEntitySet="Temp">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaCuonSach" ColumnName="MaCuonSach" />
+                <ScalarProperty Name="MaDocGia" ColumnName="MaDocGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

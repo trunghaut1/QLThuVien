@@ -109,6 +109,9 @@
     <Compile Include="Dal\TacGia.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dal\Temp.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Dal\TinhTrangCuonSach.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

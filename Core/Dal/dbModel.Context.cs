@@ -37,5 +37,6 @@ namespace Core.Dal
         public DbSet<TacGia> TacGia { get; set; }
         public DbSet<TinhTrangCuonSach> TinhTrangCuonSach { get; set; }
         public DbSet<TrangThaiDauSach> TrangThaiDauSach { get; set; }
+        public DbSet<Temp> Temp { get; set; }
     }
 }
