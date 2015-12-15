@@ -9,6 +9,21 @@ namespace Core.Biz
     {
         QLThuVienEntities _db = new QLThuVienEntities();
         // Lấy chi tiết phiếu mượn theo mã phiếu mượn
+        public CTPhieuMuon timkiem(int macuonsach,bool datra)
+        {
+            var query=from c in _db.CTPhieuMuon
+                      where c.DaTra==false
+                      select c;
+            var temp = query.Where(v => v.MaCuonSach == macuonsach).ToList();
+            CTPhieuMuon ct = new CTPhieuMuon();
+            foreach(var item in temp)
+            {
+                ct.ID=item.ID;
+                ct.MaCuonSach=item.MaCuonSach;
+                ct.MaPhieuMuon=item.MaPhieuMuon;
+            }
+            return ct;
+        }
         // >> Dùng hàm Search
         public List<CTPhieuMuon> Search(int? maphieumuon, int? macuonsach, bool? datra)
         {
@@ -18,6 +33,36 @@ namespace Core.Biz
                 if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);
                 if (macuonsach != null) record = record.Where(r => r.MaCuonSach == macuonsach);
                 if (datra != null) record = record.Where(r => r.DaTra.Value == datra.Value);
+                return record.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        //getlistbyad
+        public List<CTPhieuMuon> Search_id(int maphieumuon)
+        {
+            try
+            {
+                var record = from r in _db.CTPhieuMuon  where r.DaTra==false select r;
+                if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);            
+                return record.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        //getlistxulyphieutra
+        public List<CTPhieuMuon> _Search_id(int maphieumuon)
+        {
+            try
+            {
+                var record = from r in _db.CTPhieuMuon  select r;
+                if (maphieumuon != null) record = record.Where(r => r.MaPhieuMuon == maphieumuon);
                 return record.ToList();
             }
             catch (Exception e)

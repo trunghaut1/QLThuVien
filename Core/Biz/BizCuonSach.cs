@@ -18,7 +18,8 @@ namespace Core.Biz
                         join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
                         join e in _db.NXB on b.MaNXB equals e.MaNXB
                         join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
-                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai }).ToList();
+                        join h in _db.TinhTrangCuonSach on a.MaTinhTrang equals h.MaTinhTrang
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, h.TenTinhTrang }).ToList();
             temp = temp.Where(v => v.TenDauSach.Contains(Name)).ToList();
             return temp.Count;
         }
@@ -31,7 +32,8 @@ namespace Core.Biz
                         join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
                         join e in _db.NXB on b.MaNXB equals e.MaNXB
                         join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
-                        select new {a.MaCuonSach,b.TenDauSach,c.TenLoai,e.TenNXB,g.TenTacGia ,d.TenTrangThai}).ToList();
+                        join h in _db.TinhTrangCuonSach on a.MaTinhTrang equals h.MaTinhTrang
+                        select new {a.MaCuonSach,b.TenDauSach,c.TenLoai,e.TenNXB,g.TenTacGia ,h.TenTinhTrang}).ToList();
             var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
             System.Data.DataTable data = tool.LinqToDataTable(list);          
             return data;
@@ -45,7 +47,8 @@ namespace Core.Biz
                         join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
                         join e in _db.NXB on b.MaNXB equals e.MaNXB
                         join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
-                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai });
+                        join h in _db.TinhTrangCuonSach on a.MaTinhTrang equals h.MaTinhTrang
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, h.TenTinhTrang });
             temp = temp.Where(v => v.TenDauSach.Contains(name)).OrderBy(v => v.TenDauSach);
             var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
             System.Data.DataTable data = tool.LinqToDataTable(list);
@@ -74,8 +77,10 @@ namespace Core.Biz
                         join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
                         join e in _db.NXB on b.MaNXB equals e.MaNXB
                         join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        join h in _db.TinhTrangCuonSach on a.MaTinhTrang equals h.MaTinhTrang
+                    
                         where a.MaCuonSach.Equals(id)
-                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, d.TenTrangThai }).ToList();
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, h.TenTinhTrang}).ToList();
 
             System.Data.DataTable data = tool.LinqToDataTable(temp);
             return data;
@@ -128,7 +133,7 @@ namespace Core.Biz
             try
             {
                 CuonSach record = _db.CuonSach.SingleOrDefault(v => v.MaCuonSach == value.MaCuonSach);
-                record.MaDauSach = value.MaDauSach;
+                //record.MaDauSach = value.MaDauSach;
                 record.MaTinhTrang = value.MaTinhTrang;
                 _db.SaveChanges();
                 return true;

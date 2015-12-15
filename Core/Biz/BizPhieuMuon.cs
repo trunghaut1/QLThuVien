@@ -8,7 +8,61 @@ namespace Core.Biz
     public class BizPhieuMuon
     {
         QLThuVienEntities _db = new QLThuVienEntities();
-        // Lấy danh sách phiếu mượn
+        // Lấy danh sách phiếu mượn theo mã phiếu mượn
+        public List<PhieuMuon> GetListByID(int id)
+        {
+            try
+            {
+                var query = from c in _db.PhieuMuon
+                            where c.MaPhieuMuon.Equals(id)
+                            select c;
+                return query.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        //Lấy DS theo Mã Độc giả
+        public List<PhieuMuon> GetListByIDDocGia(int id)
+        {
+            try
+            {
+                var query = from c in _db.PhieuMuon
+                            where c.DocGia.MaDocGia.Equals(id)
+                            select c;
+                return query.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        public List<PhieuMuon> getlistbyname(String name, int pageSize, int pageNum)
+        {
+            var query = from c in _db.PhieuMuon
+                        select c;
+            var temp = query.Where(v => v.DocGia.TenDocGia.Contains(name)).OrderBy(v=>v.MaPhieuMuon).ToList();
+            var list = temp.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            return list;
+                   
+        }
+        public List<PhieuMuon> _getlistbyname(String name)
+        {
+            var query = from c in _db.PhieuMuon
+                        select c;
+            var temp = query.Where(v => v.DocGia.TenDocGia.Contains(name)).OrderBy(v => v.MaPhieuMuon).ToList();
+
+            return temp;
+        }
+        public List<PhieuMuon> getall_pagelist(int pageSize, int pageNum)
+        {
+            var query = (from c in _db.PhieuMuon orderby c.MaPhieuMuon select c).ToList();
+            var list = query.Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+            return list;
+        }
         public List<PhieuMuon> GetAll()
         {
             try
@@ -93,6 +147,30 @@ namespace Core.Biz
                 // Điều kiện ngày mượn >= ngaymuon
                 if (ngaymuon != null) record = record.Where(r => r.NgayMuon >= ngaymuon);
                 return record.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        //timphieumuon
+        public PhieuMuon _Search(int? docgia, DateTime? ngaymuon)
+        {
+            try
+            {
+                PhieuMuon pm = new PhieuMuon();
+                var query = from c in _db.PhieuMuon
+                            where c.MaDocGia.Equals(docgia)
+                            select c;
+                var temp = query.Where(v => v.NgayMuon >= ngaymuon).ToList();
+                foreach(var item in temp)
+                {
+                    pm.MaPhieuMuon = item.MaPhieuMuon;
+                    pm.NgayMuon = item.NgayMuon;
+                    pm.MaDocGia = item.MaDocGia;
+                }
+                return pm;
             }
             catch (Exception e)
             {

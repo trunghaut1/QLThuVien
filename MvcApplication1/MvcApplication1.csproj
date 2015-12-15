@@ -125,6 +125,8 @@
   <ItemGroup>
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\PhieuMuonController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Controllers\TraSachController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +153,12 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\PhieuMuon\FormPhieuMuon.cshtml" />
+    <Content Include="Views\PhieuMuon\QuanLyPhieuMuon.cshtml" />
+    <Content Include="Views\PhieuMuon\chitietphieumuon.cshtml" />
+    <Content Include="Views\TraSach\index.cshtml" />
+    <Content Include="Views\TraSach\phieutra.cshtml" />
+    <Content Include="Views\ThongKe\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

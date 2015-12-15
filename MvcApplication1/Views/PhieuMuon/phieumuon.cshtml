@@ -46,7 +46,8 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
+            
+            <a href="" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -302,9 +303,21 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
                     <li class=""></li>
+
+                    <li class="sub-menu">
+                        @Html.ActionLink("Trang Chủ", "Index", "PhieuMuon")
+                        <ul class="sub">
+                            <li><a class="" href="buttons.html">Buttons</a></li>
+                            <li><a class="" href="grids.html">Grids</a></li>
+                        </ul>
+                    </li>
+                    <li></li>
+                    <li>
                     <li class="sub-menu">
                         <a href="javascript:;" class="">
-                            <i class="icon_document_alt"></i>Mượn Sách<span class="menu-arrow arrow_carrot-right"></span>
+
+                            <i class="icon_document_alt"></i>Mượn Sách
+                            <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
                             <li>@Html.ActionLink("Lập Phiếu Mượn", "Index", "PhieuMuon")</li>
@@ -375,7 +388,7 @@
 
                             <table class="table table-striped table-advance table-hover">
                                 <tbody>
-                                    @using (Html.BeginForm("Search_Sach", "PhieuMuon", new { madocgia = ViewBag.madocgia, vienchuc = ViewBag.vienchuc }, FormMethod.Post, null))
+                                    @using (Html.BeginForm("Search_Sach", "PhieuMuon", new { madocgia = ViewBag.madocgia, vienchuc = ViewBag.vienchuc,chon=ViewBag.chon }, FormMethod.Post, null))
                                     {
                                         
                                         <tr>
@@ -402,20 +415,41 @@
                                         <th>Chọn</th>
 
                                     </tr>
+                                  
+)
+                                    
                                     @{foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@item["MaCuonSach"]</td>
-                                            <td>@item["TenDauSach"]</td>
-                                            <td>@item["TenLoai"]</td>
-                                            <td>@item["TenNXB"]</td>
-                                            <td>@item["TenTacGia"]</td>
-                                            <td>@item["TenTrangThai"]n</td>
-                                            <td><input type="submit" value="Thêm" id="@item["MaCuonSach"]" onclick="themsach(@item["MaCuonSach"])"></td>
-                                           
-                                        </tr>
-                                    }}
-
+                                      {              
+                           
+                                    
+            
+                                                            
+                  
+                               
+                                                    
+              
+                                             
+    <tr>
+        <td>@item["MaCuonSach"]</td>
+        <td>@item["TenDauSach"]</td>
+        <td>@item["TenLoai"]</td>
+        <td>@item["TenNXB"]</td>
+        <td>@item["TenTacGia"]</td>
+        <td>@item["TenTinhTrang"]</td>
+        @using (Html.BeginForm("xulychonsach", "PhieuMuon", new { madocgia = ViewBag.madocgia, masach = item["MaCuonSach"], vienchuc = ViewBag.vienchuc }, FormMethod.Post, null))
+        {          
+            if (@item["TenTinhTrang"] == "Còn hàng")
+            {
+                <td><input type="submit" value="Thêm" id="@item["MaCuonSach"]" onclick="return check(@item["MaCuonSach"])"></td>
+            }
+            else
+            {
+                <td><input type="submit" value="Đã Hết Hàng" id="@item["MaCuonSach"]" disabled></td>
+            }
+        }
+    </tr>
+}
+}
 
                                 </tbody>
                             </table>
@@ -432,9 +466,12 @@
                         else
                         {
                             for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
-                            {<i id="page+@i"> @Html.ActionLink("  " + i, "_Search_sachbyname", "PhieuMuon", new { name = ViewBag.keyword, id = i, madocgia = ViewBag.madocgia, vienchuc = ViewBag.vienchuc }, null)  </i> }
+                            {<i id="page+@i"> @Html.ActionLink("  " + i, "_Search_sachbyname", "PhieuMuon", new { name = ViewBag.keyword, id = i, madocgia = ViewBag.madocgia, vienchuc = ViewBag.vienchuc,chon=ViewBag.chon }, null)  </i> }
                         }
-                        <input class="btn btn-primary btn-sm" type="submit" value="Tiếp Tục" onclick="show()">
+@using (Html.BeginForm("nexttep", "PhieuMuon", new { madocgia = ViewBag.madocgia}, FormMethod.Post, null))
+        {
+                        <input class="btn btn-primary btn-sm" type="submit" value="Tiếp Tục">
+}
                     </div>
                 </div>
                 <!-- page end-->
@@ -456,51 +493,24 @@
 
     <script src="../../Content/js/scripts.js"></script>
     
-    <script>
-        var k = 0;
-        var r=@ViewBag.vienchuc 
-        
-        
-        alert(@ViewBag.vienchuc)
-        function themsach(x)
-        {           
-          
-            
-            if(r=="0")
-            {
-                if(k < 4)
-                {
-                    document.getElementById(x).disabled = true;
-                    k = k + 1;
-                     
-                }
-                else {
-                    alert("Không Thể Chọn"); return;
-                }
-
+    <script type="text/javascript">
+        var x ='@ViewBag.chon'
+        function check(x) {
+            if (x == "0") {
+                alert("Quá Số Lượng Chọn");
+                return false;
             }
             else {
-                if (k < 5) {
-                    document.getElementById(x).disabled = true;
-                    k = k + 1;
-                }
-                else {
-                    alert("Không Thể Chọn"); return;
-                }
+                alert("Thêm Thành Công");
+                return true;
+            }
 
-            }
-          
         }
-        function show()
-        {
-            for(var j=1;j<i;j++)
-            {
-                alert(DataView["ds"][j]);
-            }
-        }
-        
     </script>
 
+
+
+  
 
 </body>
 </html>

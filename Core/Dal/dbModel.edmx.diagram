@@ -29,7 +29,7 @@
         <AssociationConnector Association="QLThuVienModel.FK_PhieuMuon_DocGia" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_PhieuTra_PhieuMuon" ManuallyRouted="false" />
         <AssociationConnector Association="QLThuVienModel.FK_DauSach_TacGia" />
-        <EntityTypeShape EntityType="QLThuVienModel.Temp" Width="1.5" PointX="5.75" PointY="7.625" />
+        <EntityTypeShape EntityType="QLThuVienModel.Temp" Width="1.5" PointX="6.25" PointY="7.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

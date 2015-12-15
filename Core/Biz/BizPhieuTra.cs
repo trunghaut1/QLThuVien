@@ -100,5 +100,30 @@ namespace Core.Biz
                 return null;
             }
         }
+        //
+        public PhieuTra _Search(int? phieumuon, DateTime? ngaytra)
+        {
+            try
+            {
+                var query = from c in _db.PhieuTra
+                            where c.MaPhieuMuon.Equals(phieumuon)
+                            select c;
+                var temp = query.Where(v => v.NgayTra >= ngaytra).ToList();
+                PhieuTra pt = new PhieuTra();
+                foreach(var item in temp)
+                {
+                    pt.MaPhieuTra = item.MaPhieuTra;
+                    pt.MaPhieuMuon = item.MaPhieuMuon;
+                    pt.NgayTra = item.NgayTra;
+                  
+                }
+                return pt;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }
