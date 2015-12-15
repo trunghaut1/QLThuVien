@@ -127,7 +127,6 @@ namespace WinForm.View
                 btnResetS_Click(null, null);
                 docGiaDataGrid.SelectedIndex = docGiaDataGrid.Items.Count - 1;
                 docGiaDataGrid.ScrollIntoView(record);
-                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }
@@ -174,10 +173,6 @@ namespace WinForm.View
             chkVienChuc.IsChecked = false;
             cbxNamTotNghiep.SelectedIndex = -1;
             cbxNamTotNghiep.IsEnabled = true;
-            txtMaDocGia.Text = null;
-            btnAdd.IsEnabled = true;
-            LoadTime();
-            lblStatus.Content = null;
         }
         private void Search()
         {

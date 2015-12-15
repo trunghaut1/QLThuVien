@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ";
+    ViewBag.Title = "index";
 }
 @using Core.Dal;
 @using PagedList;
@@ -14,7 +14,7 @@
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Trang chủ</title>
+    <title>Basic Table | Creative - Bootstrap 3 Responsive Admin Template</title>
 
     <!-- Bootstrap CSS -->
     <link href="../../Content/css/bootstrap.min.css" rel="stylesheet">
@@ -42,11 +42,11 @@
         <!--header start-->
         <header class="header dark-bg">
             <div class="toggle-nav">
-                <div class="icon-reorder tooltips" data-original-title="" data-placement="bottom"><i class="icon_menu"></i></div>
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
 
             <!--logo start-->
-            <a href="#" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
+            <a href="index.html" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -61,18 +61,18 @@
                 <!--  search form end -->
             </div>
 
-            <div class="top-nav notification-row" >
+            <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->
-                <ul class="nav pull-right top-menu" >
+                <ul class="nav pull-right top-menu">
 
                     <!-- task notificatoin start -->
-                    <li id="task_notificatoin_bar" class="dropdown" style="display:none">
+                    <li id="task_notificatoin_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="icon-task-l">
                                 </i>
                                 <span class="badge bg-important">5</span>
                         </a>
-                        <ul class="dropdown-menu extended tasks-bar" >
+                        <ul class="dropdown-menu extended tasks-bar">
                             <div class="notify-arrow notify-arrow-blue"></div>
                             <li>
                                 <p class="blue">You have 5 pending tasks</p>
@@ -152,7 +152,7 @@
                     </li>
                     <!-- task notificatoin end -->
                     <!-- inbox notificatoin start-->
-                    <li id="mail_notificatoin_bar" class="dropdown" style="display:none">
+                    <li id="mail_notificatoin_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
                             <span class="badge bg-important">5</span>
@@ -217,7 +217,7 @@
                     </li>
                     <!-- inbox notificatoin end -->
                     <!-- alert notification start-->
-                    <li id="alert_notificatoin_bar" class="dropdown" style="display:none">
+                    <li id="alert_notificatoin_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                             <i class="icon-bell-l"></i>
@@ -265,7 +265,7 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava" style="display:none">
+                            <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                             <span class="username">Lê Quốc Anh</span>
@@ -284,7 +284,7 @@
                                 <a href="#"><i class="icon_chat_alt"></i> Tán Gẫu</a>
                             </li>
                             <li>
-                                <a href="/"><i class="icon_key_alt"></i> Đăng Xuất</a>
+                                <a href="login.html"><i class="icon_key_alt"></i> Đăng Xuất</a>
                             </li>
 
 
@@ -304,8 +304,11 @@
                     <li class=""></li>
                 
                     <li class="sub-menu">
-                       @Html.ActionLink("Trang Chủ", "Index", "TrangChu")
-                        
+                       @Html.ActionLink("Trang Chủ", "Index", "PhieuMuon")
+                        <ul class="sub">
+                            <li><a class="" href="buttons.html">Buttons</a></li>
+                            <li><a class="" href="grids.html">Grids</a></li>
+                        </ul>
                     </li>
                     <li></li>
                     <li>
@@ -320,15 +323,18 @@
                         <li>@Html.ActionLink("Quản Lý Phiếu Mượn", "quanlyphieumuon", "PhieuMuon")</li>
                     </ul>
                     </li>
-
                     <li class="sub-menu">
-
                         @Html.ActionLink("Trả Sách", "Index", "TraSach")
-                        
+                        <ul class="sub">
+                            <li><a class="" href="buttons.html">Buttons</a></li>
+                            <li><a class="" href="grids.html">Grids</a></li>
+                        </ul>
                     </li>
                     <li></li>
                     <li>
-                        
+                        <ul class="sub">
+                            <li><a class="active" href="basic_table.html">Basic Table</a></li>
+                        </ul>
                     </li>
 
                     <li class="sub-menu">
@@ -339,7 +345,7 @@
                         </a>
                         <ul class="sub">
                             <li>@Html.ActionLink("Thống Kê Phiếu Mượn", "thongkephieumuon", "ThongKe")</li>
-                            
+                            <li>@Html.ActionLink("Thống Kê Sách", "thongkesach", "ThongKe")</span></li>
 
                         </ul>
                     </li>
@@ -393,7 +399,7 @@
                                         <td>@dg.MaDocGia</td>
                                         <td>@dg.TenDocGia</td>
                                         <td>@dg.Email</td>
-                                        <td>@dg.NgayHetHan.Value.ToShortDateString()</td>
+                                        <td>@dg.NgayHetHan</td>
                                         <td>@dg.SDT</td>
                                         <td>@if (dg.VienChuc==true) {<input type="checkbox" checked disabled> }
                                             else

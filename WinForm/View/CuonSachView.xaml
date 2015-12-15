@@ -21,10 +21,10 @@
                 <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                <Button x:Name="btnAdd" Content="Lưu" Width="120" Height="40" Margin="0 5" Click="btnAdd_Click" IsEnabled="False" />
+                <Button x:Name="btnAdd" Content="Thêm" Width="120" Height="40" Margin="0 5" Click="btnAdd_Click" />
                 <Button x:Name="btnUpdate" Content="Cập nhật" Width="120" Height="40" Margin="0 5" Click="btnUpdate_Click" />
                 <Button x:Name="btnDel" Content="Xóa" Width="120" Height="40" Margin="0 5" IsEnabled="False" />
-                <Button x:Name="btnReset" Content="Thêm" Width="120" Height="40" Margin="0 5" Click="btnReset_Click" />
+                <Button x:Name="btnReset" Content="Làm mới" Width="120" Height="40" Margin="0 5" Click="btnReset_Click" />
             </StackPanel>
             <Button x:Name="btnClose2" Grid.Column="1" HorizontalAlignment="Right" Width="30" Height="30" Style="{DynamicResource CircleButton}" Margin="10 0" ToolTip="Thoát" Visibility="Hidden">
                 <Viewbox Width="15" Height="15">
