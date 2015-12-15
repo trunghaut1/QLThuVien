@@ -82,6 +82,8 @@ namespace WinForm.View
         {
             cbxMaDauSach.SelectedIndex = -1;
             cbxMaTinhTrang.SelectedIndex = -1;
+            txtMaCuonSach.Text = null;
+            btnAdd.IsEnabled = true;
         }
         private bool CheckNull()
         {
@@ -112,6 +114,7 @@ namespace WinForm.View
                 btnResetS_Click(null, null);
                 cuonSachDataGrid.SelectedIndex = cuonSachDataGrid.Items.Count - 1;
                 cuonSachDataGrid.ScrollIntoView(record);
+                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }

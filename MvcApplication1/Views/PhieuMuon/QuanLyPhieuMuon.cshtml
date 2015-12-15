@@ -40,11 +40,11 @@
         <!--header start-->
         <header class="header dark-bg">
             <div class="toggle-nav">
-                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+                <div class="icon-reorder tooltips" data-original-title="" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
+            <a href="#" class="logo">Quản Lý <span class="lite">Thư viện</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
@@ -64,7 +64,7 @@
                 <ul class="nav pull-right top-menu">
 
                     <!-- task notificatoin start -->
-                    <li id="task_notificatoin_bar" class="dropdown">
+                    <li id="task_notificatoin_bar" class="dropdown" style="display:none">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="icon-task-l">
                                 </i>
@@ -150,7 +150,7 @@
                     </li>
                     <!-- task notificatoin end -->
                     <!-- inbox notificatoin start-->
-                    <li id="mail_notificatoin_bar" class="dropdown">
+                    <li id="mail_notificatoin_bar" class="dropdown" style="display:none">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
                             <span class="badge bg-important">5</span>
@@ -215,7 +215,7 @@
                     </li>
                     <!-- inbox notificatoin end -->
                     <!-- alert notification start-->
-                    <li id="alert_notificatoin_bar" class="dropdown">
+                    <li id="alert_notificatoin_bar" class="dropdown" style="display:none">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                             <i class="icon-bell-l"></i>
@@ -263,7 +263,7 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
+                            <span class="profile-ava" style="display:none">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                             <span class="username">Lê Quốc Anh</span>
@@ -282,7 +282,7 @@
                                 <a href="#"><i class="icon_chat_alt"></i> Tán Gẫu</a>
                             </li>
                             <li>
-                                <a href="login.html"><i class="icon_key_alt"></i> Đăng Xuất</a>
+                                <a href="/"><i class="icon_key_alt"></i> Đăng Xuất</a>
                             </li>
 
 
@@ -302,11 +302,8 @@
                     <li class=""></li>
 
                     <li class="sub-menu">
-                        @Html.ActionLink("Trang Chủ", "Index", "PhieuMuon")
-                        <ul class="sub">
-                            <li><a class="" href="buttons.html">Buttons</a></li>
-                            <li><a class="" href="grids.html">Grids</a></li>
-                        </ul>
+                        @Html.ActionLink("Trang Chủ", "Index", "TrangChu")
+                        
                     </li>
                     <li></li>
                     <li>
@@ -323,10 +320,7 @@
                     </li>
                     <li class="sub-menu">
                         @Html.ActionLink("Trả Sách", "Index", "TraSach")
-                        <ul class="sub">
-                            <li><a class="" href="buttons.html">Buttons</a></li>
-                            <li><a class="" href="grids.html">Grids</a></li>
-                        </ul>
+                        
                     </li>
                     <li></li>
                     <li>
@@ -343,7 +337,7 @@
                         </a>
                         <ul class="sub">
                             <li>@Html.ActionLink("Thống Kê Phiếu Mượn", "thongkephieumuon", "ThongKe")</li>
-                            <li>@Html.ActionLink("Thống Kê Sách", "thongkesach", "ThongKe")</span></li>
+                            
 
                         </ul>
                     </li>
@@ -408,7 +402,7 @@
                                         <td>@pm.MaPhieuMuon</td>
                                         <td>@pm.DocGia.MaDocGia</td>
                                         <td>@pm.DocGia.TenDocGia</td>
-                                        <td>@pm.NgayMuon</td>
+                                        <td>@pm.NgayMuon.Value.ToShortDateString()</td>
                                         <td id="@pm.MaPhieuMuon">@if (pm.DocGia.VienChuc == true)
                                             {ViewBag.songay = 30;
                                                 <script>
