@@ -154,6 +154,8 @@ namespace WinForm.View
             cbxMaNXB.SelectedIndex = -1;
             cbxMaTacGia.SelectedIndex = -1;
             cbxMaTrangThai.SelectedIndex = -1;
+            txtMaDauSach.Text = null;
+            btnAdd.IsEnabled = true;
         }
         private bool CheckNull()
         {
@@ -203,6 +205,7 @@ namespace WinForm.View
                 btnResetS_Click(null, null);
                 dauSachDataGrid.SelectedIndex = dauSachDataGrid.Items.Count - 1;
                 dauSachDataGrid.ScrollIntoView(record);
+                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }
