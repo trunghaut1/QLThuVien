@@ -52,7 +52,46 @@ namespace MvcApplication1.Controllers
             }
             return View("tracuu");
         }
-            
+        public ActionResult SearchDocGia(FormCollection fc,String id="1")
+        {
+            try
+            {
+                ViewBag.theloai = "2";
+                ViewBag.keyword = fc["search"];
+                int ma = int.Parse(fc["search"].ToString());
+                ViewData["dsdg"] = db.GetListByID(ma);
+                ViewBag.tongso = "0";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.theloai = "2";
+                ViewBag.keyword = fc["search"];
+                ViewData["dsdg"] = db._GetByPageLinq(fc["search"], 5, int.Parse(id));
 
+                ViewBag.tongso = db.Search(fc["search"], "", "", "", null, null, null, null).Count.ToString().Trim();
+            }
+            return View("index");
+        }
+        public ActionResult _Search(String name = "a", String id = "1")
+        {
+            try
+            {
+                ViewBag.theloai = "2";
+                ViewBag.keyword = name;
+                int ma = int.Parse(name.ToString());
+                ViewData["dsdg"] = db.GetListByID(ma);
+                ViewBag.tongso = "0";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.theloai = "2";
+                ViewBag.keyword = name;
+                ViewData["dsdg"] = db._GetByPageLinq(name, 5, int.Parse(id));
+
+                ViewBag.tongso = db.Search(name, "", "", "", null, null, null, null).Count.ToString().Trim();
+            }
+            return View("index");
+
+        }
     }
 }
