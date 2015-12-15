@@ -67,6 +67,7 @@ namespace WinForm.View
                 btnResetS_Click(null, null);
                 tacGiaDataGrid.SelectedIndex = tacGiaDataGrid.Items.Count - 1;
                 tacGiaDataGrid.ScrollIntoView(record);
+                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }
@@ -120,6 +121,8 @@ namespace WinForm.View
         {
             txtNoiCongTac.Text = null;
             txtTenTacGia.Text = null;
+            txtMaTacGia.Text = null;
+            btnAdd.IsEnabled = true;
         }
         private void Search()
         {

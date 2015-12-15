@@ -43,7 +43,9 @@ namespace WinForm.View
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
+            txtMaLoai.Text = null;
             txtTenLoai.Text = null;
+            btnAdd.IsEnabled = true;
         }
         private bool CheckNull()
         {
@@ -68,6 +70,7 @@ namespace WinForm.View
                 LoadList();
                 loaiSachDataGrid.SelectedIndex = loaiSachDataGrid.Items.Count - 1;
                 loaiSachDataGrid.ScrollIntoView(record);
+                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }

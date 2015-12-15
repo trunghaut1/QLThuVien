@@ -78,6 +78,7 @@ namespace WinForm.View
                 btnResetS_Click(null, null);
                 nXBDataGrid.SelectedIndex = nXBDataGrid.Items.Count - 1;
                 nXBDataGrid.ScrollIntoView(record);
+                btnAdd.IsEnabled = false;
             }
             else MessageBox.Show("Thêm thất bại");
         }
@@ -106,6 +107,7 @@ namespace WinForm.View
             txtTenNXB.Text = null;
             txtSDT.Text = null;
             txtDiaChi.Text = null;
+            
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
@@ -134,6 +136,8 @@ namespace WinForm.View
             txtTenNXB.Text = null;
             txtSDT.Text = null;
             txtDiaChi.Text = null;
+            txtMaNXB.Text = null;
+            btnAdd.IsEnabled = true;
         }
         private void Search()
         {
