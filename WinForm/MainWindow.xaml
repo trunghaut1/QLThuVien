@@ -82,7 +82,7 @@
                             <Path Style="{DynamicResource ThongKeIcon}"/>
                         </Viewbox>
                     </MenuItem.Icon>
-                    <MenuItem x:Name="mnTKCuonSach" Header="Số cuốn sách" Click="mnTKCuonSach_Click">
+                    <MenuItem x:Name="mnTKCuonSach" Header="Cuốn sách theo đầu sách" Click="mnTKCuonSach_Click">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <Path Style="{DynamicResource ThongKeIcon}"/>
