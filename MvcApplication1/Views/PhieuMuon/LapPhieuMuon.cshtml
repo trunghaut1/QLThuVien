@@ -434,13 +434,13 @@
                                 
                             @if(int.Parse(ViewBag.theloai)==0)
                             {
-                                 for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                                for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                         {<i id="page+@i"> @Html.ActionLink("  " + i, "Index/" + i, "PhieuMuon")  </i> } 
                                                                                                       }
                            
                           else
-                            { 
-                                for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                            {
+                                for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                         {<i id="page+@i"> @Html.ActionLink("  " + i, "_search/", "PhieuMuon", new {name=ViewBag.keyword,id=i },null)  </i> } 
                             }
                             

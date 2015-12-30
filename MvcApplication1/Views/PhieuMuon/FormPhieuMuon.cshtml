@@ -404,7 +404,7 @@
                             </tr>
                             <tr>
                                 <td><b><big>Ngày Mượn: </big></b></td>
-                                <td><b id="date"><big>dd</big></b></td>
+                                <td><b id="date"><big><input type="datetime"/></big></b></td>
 
                             </tr>
 
@@ -474,11 +474,7 @@
     <!--custome script for all page-->
     <script src="../../Content/js/scripts.js"></script>
     <script>
-        var d = new Date();
-        var month = d.getMonth() + 1;
-        
-        document.getElementById("date").innerHTML = d.getDate() + "/" + month + "/" + d.getFullYear();
-        document.getElementById("ngay").value = d.getDate() + "/" + month + "/" + d.getFullYear();
+       
     </script>
 
 </body>

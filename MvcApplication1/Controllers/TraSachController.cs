@@ -27,7 +27,7 @@ namespace MvcApplication1.Controllers
             ViewBag.loai = "1";
             int sotrang = int.Parse(id);
             ViewBag.tongso = dbpm.GetAll().Count.ToString().Trim();
-
+            
             ViewData["dspm"] = dbpm.getall_pagelist(5, sotrang).ToList();
             return View("index");
         }
@@ -78,6 +78,7 @@ namespace MvcApplication1.Controllers
         {
             
             int _id = int.Parse(id);
+                     
             var temp = ctpm.Search_id(_id).ToList();
             List<DataRow
          > list = new List<DataRow
@@ -99,6 +100,7 @@ namespace MvcApplication1.Controllers
         public ActionResult xulytrasach(FormCollection fc,String mapm)
         {
             int maphieumuon=int.Parse(mapm);
+            
             PhieuTra phieutra = new PhieuTra();
             phieutra.MaPhieuMuon = maphieumuon;
             phieutra.NgayTra = DateTime.Parse(fc["ngay"]);
@@ -146,6 +148,17 @@ namespace MvcApplication1.Controllers
                     dbsach.Update(cs);
                 }
             }
+            int soluongsach = dbpm.soluongsachmuon(maphieumuon);
+            if(!(soluongsach>0))
+            {
+                PhieuMuon pm = new PhieuMuon();
+                pm = dbpm.GetByID(maphieumuon);
+                pm.tinhtrang = true;
+                dbpm.Update(pm);
+            }
+
+           
+            
             return RedirectToAction("Index");
         }
     }

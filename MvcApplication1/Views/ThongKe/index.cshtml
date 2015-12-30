@@ -2,6 +2,7 @@
     Layout = null;
 }
 @using Core.Dal;
+@using MvcApplication1.Controllers;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -404,7 +405,7 @@
 
                                         <th>Hạn Trả</th>
                                         <th>Tác Vụ</th>
-
+                                        @{PhieuMuonController pmcontrol = new PhieuMuonController();}
                                     </tr>
                                     @{foreach (PhieuMuon pm in (List<PhieuMuon>)ViewData["dspm"])
                                     {
@@ -414,23 +415,12 @@
                                             <td>@pm.DocGia.TenDocGia</td>
                                             <td>@pm.NgayMuon</td>
                                             <td id="@pm.MaPhieuMuon">
-                                                @if (pm.DocGia.VienChuc == true)
+                                                @if (pm.DocGia.VienChuc == true && pm.tinhtrang == false)
                                                 {
                                                     ViewBag.songay = 30;
                                                     <script>
-                                                        var day = new Date();
-                                                        var today = day.getDate().toString();
-                                                        var month = new Date();
-                                                        var monthnow = month.getMonth() + 1;
-
-                                                        var daymuon = '@pm.NgayMuon'
-                                                        var thangmuon = daymuon.substring(3, 5)
-                                                        var thangdu = monthnow - thangmuon;
-
-                                                        var ngaymuon = daymuon.substring(0, 2);
-                                                        var tongso = '@ViewBag.songay'
-                                                        var songaytrongthang = '30';
-                                                        var ngaytra = (tongso - (today - ngaymuon)) - thangdu * songaytrongthang;
+                                                        var ngaytra =
+                                                            '@pmcontrol.tinhsongaymuon(pm.NgayMuon.ToString(),true)';
 
                                                         if (ngaytra > 0) {
                                                             document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra.toString() + " ngày";
@@ -442,33 +432,30 @@
                                                         }
                                                     </script>
                                                 }
-                                                else
-                                                {
-                                                    ViewBag.songay = 20;
-                                                    <script>
-                                                        var day = new Date();
-                                                        var today = day.getDate().toString();
-                                                        var month = new Date();
-                                                        var monthnow = month.getMonth() + 1;
+                                            @if (pm.DocGia.VienChuc == false && pm.tinhtrang == false)
+                                            {
+                                                ViewBag.songay = 20;
+                                                <script>
 
-                                                        var daymuon = '@pm.NgayMuon'
-                                                        var thangmuon = daymuon.substring(3, 5)
-                                                        var thangdu = monthnow - thangmuon;
+                                                    var ngaytra ='@pmcontrol.tinhsongaymuon(pm.NgayMuon.ToString(),false
+)';
 
-                                                        var ngaymuon = daymuon.substring(0, 2);
-                                                        var tongso = '@ViewBag.songay'
-                                                        var songaytrongthang = '30';
-                                                        var ngaytra = (tongso - (today - ngaymuon)) - thangdu * songaytrongthang;
+                                                    if (ngaytra > 0) { document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra + " ngày"; }
+                                                    else {
+                                                        document.getElementById("@pm.MaPhieuMuon").innerHTML = "Quá Hạn " + ngaytra.toString() + " ngày";
+                                                        document.getElementById("@pm.MaPhieuMuon").style.backgroundColor = '#003F87';
 
-                                                        if (ngaytra > 0) { document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra + " ngày"; }
-                                                        else {
-                                                            document.getElementById("@pm.MaPhieuMuon").innerHTML = "Quá Hạn " + ngaytra.toString() + " ngày";
-                                                            document.getElementById("@pm.MaPhieuMuon").style.backgroundColor = '#003F87';
-
-                                                        }
-                                                    </script>
-                                                }
-                                            </td>
+                                                    }
+                                                </script>
+                                            }
+                                            @if (pm.tinhtrang == true)
+                                            {
+                                                <script>
+                                                    document.getElementById("@pm.MaPhieuMuon").innerHTML = "Đã Trả "
+                                                </script>
+                                            }
+                                        </td>
+                                              
                                             <td>@Html.ActionLink("Xem Chi Tiết", "PM_xemchitiet", "PhieuMuon", new { id = @pm.MaPhieuMuon }, null)</td>
 
                                         </tr>
@@ -483,13 +470,13 @@
                         <div align="right"><b>Có @ViewBag.tongso Phiếu Mượn</b></div>
                         @if (int.Parse(ViewBag.loai) == 1)
                         {
-                            for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                            for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                             {<i id="page+@i"> @Html.ActionLink("  " + i, "index/" + i, "ThongKe")  </i> }
                         }
                         else if (int.Parse(ViewBag.loai) == 2)
                         {
 
-                            for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                            for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                             {<i id="page+@i"> @Html.ActionLink("  " + i, "Search_PMbyname", "ThongKe", new { name = ViewBag.keyword, id = i }, null)  </i> }
 
                         }

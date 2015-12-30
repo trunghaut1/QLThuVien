@@ -23,6 +23,7 @@ namespace Core.Dal
         public int MaPhieuMuon { get; set; }
         public Nullable<int> MaDocGia { get; set; }
         public Nullable<System.DateTime> NgayMuon { get; set; }
+        public Nullable<bool> tinhtrang { get; set; }
     
         public virtual ICollection<CTPhieuMuon> CTPhieuMuon { get; set; }
         public virtual DocGia DocGia { get; set; }

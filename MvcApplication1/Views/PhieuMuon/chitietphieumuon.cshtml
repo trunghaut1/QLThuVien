@@ -416,20 +416,35 @@
 
                                         <th width="19%"><i class="icon_mobile"></i> Tác Giả</th>
                                         <th width="14%">Thể Loại</th>
+                                        <th width="14%">Tình Trạng</th>
                                         
 
                                     </tr>
                                     @{foreach(var item in Model)
                                     {
-                                         <tr>
+                                         <tr id="@item["MaCuonSach"]">
                                         <td>@item["MaCuonSach"]</td>
                                         <td>@item["TenDauSach"]</td>
                                         <td>@item["TenLoai"]</td>
                                         <td>@item["TenNXB"]</td>
                                         <td>@item["TenTacGia"]</td>
                                         <td>@item["TenLoai"]</td>
+                                        @if(item["DaTra"]==true)
+                                        {
+                                            <td >đã trả</td>
                                             
+                                        }
+                                        else
+                                        {
+                                            <td>Đang Mượn</td>
+                                        }
                                     </tr>
+                                        if(item["DaTra"]==true)
+                                        {
+                                            <script>
+                                                document.getElementById('@item["MaCuonSach"]').style.backgroundColor = '#003F87';
+                                            </script>
+                                        }
                                     }}
                                    
 

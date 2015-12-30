@@ -440,7 +440,7 @@
         {          
             if (@item["TenTinhTrang"] == "Còn hàng")
             {
-                <td><input type="submit" value="Thêm" id="@item["MaCuonSach"]" onclick="return check(@item["MaCuonSach"])"></td>
+                <td><input type="submit" value="Thêm" id="@item["MaCuonSach"]" onclick="return check(@ViewBag.chon)"></td>
             }
             else
             {
@@ -461,11 +461,11 @@
                        
                         @if (int.Parse(ViewBag.theloai) == 1)
                         {
-                            for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                            for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                         {<i id="page+@i"> @Html.ActionLink("  " + i, "lapphieumuon", "PhieuMuon", new { id = ViewBag.madocgia, _sotrang = i }, null)  </i> } }                       
                         else
                         {
-                            for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                            for (int i = 1; i <= Math.Ceiling((float.Parse(ViewBag.tongso) / 5)); i++)
                             {<i id="page+@i"> @Html.ActionLink("  " + i, "_Search_sachbyname", "PhieuMuon", new { name = ViewBag.keyword, id = i, madocgia = ViewBag.madocgia, vienchuc = ViewBag.vienchuc,chon=ViewBag.chon }, null)  </i> }
                         }
 @using (Html.BeginForm("nexttep", "PhieuMuon", new { madocgia = ViewBag.madocgia}, FormMethod.Post, null))
@@ -494,7 +494,7 @@
     <script src="../../Content/js/scripts.js"></script>
     
     <script type="text/javascript">
-        var x ='@ViewBag.chon'
+     
         function check(x) {
             if (x == "0") {
                 alert("Quá Số Lượng Chọn");

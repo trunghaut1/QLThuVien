@@ -85,6 +85,22 @@ namespace Core.Biz
             System.Data.DataTable data = tool.LinqToDataTable(temp);
             return data;
         }
+        public System.Data.DataTable searchbyid_(int id, int mapm)
+        {
+            var temp = (from a in _db.CuonSach
+                        join b in _db.DauSach on a.MaDauSach equals b.MaDauSach
+                        join c in _db.LoaiSach on b.MaLoai equals c.MaLoai
+                        join d in _db.TrangThaiDauSach on b.MaTrangThai equals d.MaTrangThai
+                        join e in _db.NXB on b.MaNXB equals e.MaNXB
+                        join g in _db.TacGia on b.MaTacGia equals g.MaTacGia
+                        join h in _db.TinhTrangCuonSach on a.MaTinhTrang equals h.MaTinhTrang
+                        join f in _db.CTPhieuMuon on a.MaCuonSach equals f.MaCuonSach
+                        where a.MaCuonSach.Equals(id) && f.MaPhieuMuon.Equals(mapm)
+                        select new { a.MaCuonSach, b.TenDauSach, c.TenLoai, e.TenNXB, g.TenTacGia, h.TenTinhTrang, f.DaTra }).ToList();
+
+            System.Data.DataTable data = tool.LinqToDataTable(temp);
+            return data;
+        }
         // Lấy danh sách cuốn sách
         public List<CuonSach> GetAll()
         {

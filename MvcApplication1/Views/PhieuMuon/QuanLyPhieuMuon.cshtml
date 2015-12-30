@@ -2,6 +2,7 @@
     Layout = null;
 }
 @using Core.Dal;
+@using MvcApplication1.Controllers;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -401,7 +402,7 @@
                                         <th>Hạn Trả</th>
                                         <th>Tác Vụ</th>
 
-                                    </tr>
+                                    </tr>@{PhieuMuonController pmcontrol = new PhieuMuonController();}
                                     @{foreach(PhieuMuon pm in (List<PhieuMuon>)ViewData["dspm"])
                                       {
                                           <tr>
@@ -409,49 +410,28 @@
                                         <td>@pm.DocGia.MaDocGia</td>
                                         <td>@pm.DocGia.TenDocGia</td>
                                         <td>@pm.NgayMuon</td>
-                                        <td id="@pm.MaPhieuMuon">@if (pm.DocGia.VienChuc == true)
+                                        <td id="@pm.MaPhieuMuon">@if (pm.DocGia.VienChuc == true &&pm.tinhtrang==false)
                                             {ViewBag.songay = 30;
                                                 <script>
-                                                    var day = new Date();
-                                                    var today = day.getDate().toString();
-                                                    var month = new Date();
-                                                    var monthnow = month.getMonth()+1;
-                                                    
-                                                    var daymuon = '@pm.NgayMuon'
-                                                    var thangmuon = daymuon.substring(3,5)
-                                                    var thangdu = monthnow - thangmuon;
-                                                   
-                                                    var ngaymuon = daymuon.substring(0, 2);
-                                                    var tongso = '@ViewBag.songay'
-                                                    var songaytrongthang = '30';
-                                                    var ngaytra = (tongso-(today-ngaymuon)) -thangdu*songaytrongthang ;
+                                                        var ngaytra =
+                                                            '@pmcontrol.tinhsongaymuon(pm.NgayMuon.ToString(),true)';
                                                   
-                                                    if (ngaytra > 0) {
-                                                        document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra.toString() + " ngày";
+                                                        if (ngaytra > 0) {
+                                                            document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra.toString() + " ngày";
                                                        
-                                                    }
-                                                    else {
-                                                        document.getElementById("@pm.MaPhieuMuon").innerHTML = "Quá Hạn " + ngaytra.toString() + " ngày";
-                                                        document.getElementById("@pm.MaPhieuMuon").style.backgroundColor = '#003F87';
-                                                    }
+                                                        }
+                                                        else {
+                                                            document.getElementById("@pm.MaPhieuMuon").innerHTML = "Quá Hạn " + ngaytra.toString() + " ngày";
+                                                            document.getElementById("@pm.MaPhieuMuon").style.backgroundColor = '#003F87';
+                                                        }
                                                 </script>
                                             }
-                                            else
+                                            @if (pm.DocGia.VienChuc == false && pm.tinhtrang == false)
                                             {ViewBag.songay = 20;
                                                                                      <script>
-                                                    var day = new Date();
-                                                    var today = day.getDate().toString();
-                                                    var month = new Date();
-                                                    var monthnow = month.getMonth()+1;
-
-                                                    var daymuon = '@pm.NgayMuon'
-                                                    var thangmuon = daymuon.substring(3,5)
-                                                    var thangdu = monthnow - thangmuon;
-                                                 
-                                                    var ngaymuon = daymuon.substring(0, 2);
-                                                    var tongso = '@ViewBag.songay'
-                                                    var songaytrongthang = '30';
-                                                    var ngaytra = (tongso-(today-ngaymuon)) -thangdu*songaytrongthang ;
+                                                                                       
+                                                    var ngaytra ='@pmcontrol.tinhsongaymuon(pm.NgayMuon.ToString(),false
+)';
 
                                                     if (ngaytra > 0) { document.getElementById("@pm.MaPhieuMuon").innerHTML = "Còn " + ngaytra + " ngày"; }
                                                     else {
@@ -460,7 +440,14 @@
 
                                                     }
                                                 </script>
-                                            }</td>
+                                            }
+                                            @if(pm.tinhtrang==true)
+                                            {
+                                                <script>
+                                                    document.getElementById("@pm.MaPhieuMuon").innerHTML = "Đã Trả " 
+                                                </script>
+                                            }
+                                            </td>
                                         <td>@Html.ActionLink("Xem Chi Tiết","PM_xemchitiet","PhieuMuon",new{id=@pm.MaPhieuMuon},null)</td>
 
                                     </tr>
@@ -474,14 +461,32 @@
                         </section>
                         @if (int.Parse(ViewBag.loai) == 1)
                         {
-                             for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
-                        {<i id="page+@i"> @Html.ActionLink("  " + i, "quanlyphieumuon/" + i, "PhieuMuon")  </i> } 
-                        }
-                        else if (int.Parse(ViewBag.loai) == 2)
-                        {
+                            int r=int.Parse(ViewBag.tongso) % 5;
+                            if (r > 0)
+                            {
+                                for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5) + 1; i++)
+                                {<i id="page+@i"> @Html.ActionLink("  " + i, "quanlyphieumuon/" + i, "PhieuMuon")  </i> }
+                            }
+                            else
+                            {
+                                 for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                                  {<i id="page+@i"> @Html.ActionLink("  " + i, "quanlyphieumuon/" + i, "PhieuMuon")  </i> } 
+                            }
                             
-                            for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                        }
+                        @if (int.Parse(ViewBag.loai) == 2)
+                        {
+                            int r = int.Parse(ViewBag.tongso) % 5;
+                            if (r > 0)
+                            { 
+                                 for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5)+1; i++)
                         {<i id="page+@i"> @Html.ActionLink("  " + i, "Search_PMbyname" , "PhieuMuon", new { name = ViewBag.keyword, id = i },null)  </i> } 
+                            }
+                           else
+                            {
+                                 for (int i = 1; i <= (int.Parse(ViewBag.tongso) / 5); i++)
+                        {<i id="page+@i"> @Html.ActionLink("  " + i, "Search_PMbyname" , "PhieuMuon", new { name = ViewBag.keyword, id = i },null)  </i> } 
+                            }
                             
                         }
                         

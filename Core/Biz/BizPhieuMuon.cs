@@ -8,7 +8,20 @@ namespace Core.Biz
     public class BizPhieuMuon
     {
         QLThuVienEntities _db = new QLThuVienEntities();
+        int soluong;
         // Lấy danh sách phiếu mượn theo mã phiếu mượn
+        public int soluongsachmuon(int phieumuon)
+        {
+            var query = from c in _db.PhieuMuon
+                        join d in _db.CTPhieuMuon on c.MaPhieuMuon equals d.MaPhieuMuon
+                        where c.MaPhieuMuon.Equals(phieumuon)&&d.DaTra==false
+                        select new
+                        {
+                            c.MaPhieuMuon,d.MaCuonSach
+                        };
+            soluong = query.ToList().Count;
+            return soluong;
+        }
         public List<PhieuMuon> GetListByID(int id)
         {
             try
@@ -112,6 +125,7 @@ namespace Core.Biz
                 PhieuMuon record = _db.PhieuMuon.SingleOrDefault(v => v.MaPhieuMuon == value.MaPhieuMuon);
                 record.MaDocGia = value.MaDocGia;
                 record.NgayMuon = value.NgayMuon;
+                record.tinhtrang = value.tinhtrang;
                 _db.SaveChanges();
                 return true;
             }

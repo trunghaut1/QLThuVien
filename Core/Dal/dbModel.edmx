@@ -79,6 +79,7 @@
           <Property Name="MaPhieuMuon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaDocGia" Type="int" />
           <Property Name="NgayMuon" Type="datetime" />
+          <Property Name="tinhtrang" Type="bit" />
         </EntityType>
         <EntityType Name="PhieuTra">
           <Key>
@@ -427,6 +428,7 @@
           <NavigationProperty Name="CTPhieuMuon" Relationship="Self.FK_CTPhieuMuon_PhieuMuon" FromRole="PhieuMuon" ToRole="CTPhieuMuon" />
           <NavigationProperty Name="DocGia" Relationship="Self.FK_PhieuMuon_DocGia" FromRole="PhieuMuon" ToRole="DocGia" />
           <NavigationProperty Name="PhieuTra" Relationship="Self.FK_PhieuTra_PhieuMuon" FromRole="PhieuMuon" ToRole="PhieuTra" />
+          <Property Name="tinhtrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="PhieuTra">
           <Key>
@@ -762,6 +764,7 @@
           <EntitySetMapping Name="PhieuMuon">
             <EntityTypeMapping TypeName="QLThuVienModel.PhieuMuon">
               <MappingFragment StoreEntitySet="PhieuMuon">
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
                 <ScalarProperty Name="MaPhieuMuon" ColumnName="MaPhieuMuon" />
                 <ScalarProperty Name="MaDocGia" ColumnName="MaDocGia" />
                 <ScalarProperty Name="NgayMuon" ColumnName="NgayMuon" />

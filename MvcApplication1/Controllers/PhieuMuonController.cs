@@ -21,6 +21,9 @@ namespace MvcApplication1.Controllers
         BizCTPhieuMuon ctpm = new BizCTPhieuMuon();
         int chon;
         int maphieumuon;
+        int songay;
+        int songaymuon = 0;
+        int songaychophep;
         public ActionResult Index(String id="1")
         {
              deleteallrow();
@@ -273,6 +276,7 @@ namespace MvcApplication1.Controllers
           
             phieumuon.MaDocGia = int.Parse(_madocgia);
             phieumuon.NgayMuon = DateTime.Parse(fc["ngay"]);
+            phieumuon.tinhtrang = false;
             dbpm.Add(phieumuon);
             int madocgia=int.Parse(_madocgia);
             DateTime ngaymuon=DateTime.Parse(fc["ngay"]);
@@ -311,7 +315,7 @@ namespace MvcApplication1.Controllers
             deleteallrow();
             ViewBag.loai = "1";
             int sotrang = int.Parse(id);
-            ViewBag.tongso = dbpm.GetAll().Count.ToString().Trim();
+            ViewBag.tongso = dbpm.GetAll().Count.ToString().Trim();          
             ViewData["dspm"] = dbpm.getall_pagelist(5, sotrang);
             return View("QuanLyPhieuMuon");        
         }
@@ -324,7 +328,7 @@ namespace MvcApplication1.Controllers
          >();
             foreach(var item in temp)
             {
-                System.Data.DataTable dt= dbsach.searchbyid(item.MaCuonSach);
+                System.Data.DataTable dt = dbsach.searchbyid_(item.MaCuonSach, item.MaPhieuMuon);
                 foreach (DataRow dr in dt.Rows)
                 {
                     list.Add(dr);
@@ -368,6 +372,50 @@ namespace MvcApplication1.Controllers
             ViewBag.keyword = name;
             return View("QuanLyPhieuMuon");
 
+        }
+        public int songaytrongthang(int n)
+       {           
+            switch(n)
+            {
+                case 1: songay = 31; break;
+                case 2: songay = 28; break;
+                case 3: songay = 31; break;
+                case 4: songay = 30; break;
+                case 5: songay = 31; break;
+                case 6: songay = 30; break;
+                case 7: songay = 31; break;
+                case 8: songay = 31; break;
+                case 9: songay = 30; break;
+                case 10: songay = 31; break;
+                case 11: songay = 30; break;
+                case 12: songay = 31; break;
+
+            }
+            return songay;
+       }
+        public int tinhsongaymuon(String timemuon,bool vienchuc)
+        {
+            if(vienchuc)
+            {
+                songaychophep=30;
+            }
+            else{
+                songaychophep=20;
+            }
+            int ngaymuon = int.Parse(timemuon.Substring(0, 2));
+            int thangmuon = int.Parse(timemuon.Substring(3, 2));
+            String timenow = DateTime.Now.ToString().Trim();
+            int ngayhientai = int.Parse(timenow.Substring(0, 2));
+            int thanghientai = int.Parse(timenow.Substring(3, 2));
+            int sothangdu = thanghientai - thangmuon;
+            songaymuon = songaytrongthang(thangmuon) - ngaymuon + ngayhientai;           
+                for(int j=thangmuon+1;j<thangmuon+sothangdu;j++)
+                {
+                    songaymuon += songaytrongthang(j);
+                }
+            if(sothangdu>0)
+                return songaychophep - songaymuon;
+            return songaychophep;
         }
     }
 }
